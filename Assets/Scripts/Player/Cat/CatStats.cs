@@ -7,6 +7,18 @@ public class CatStats : MonoBehaviour
 
     [SerializeField] float timeLife;
 
+    [SerializeField] float hp;
+
+    [SerializeField] float speed;
+
+    [SerializeField] float jumpForce;
+
+    [SerializeField] float attack;
+
+    [SerializeField] float attackSpeed;
+
+    [SerializeField] float attackRate;
+
     [SerializeField] NumberEventChannel timerEvent;
 
     [SerializeField] VoidEventChannel dieChannel;
