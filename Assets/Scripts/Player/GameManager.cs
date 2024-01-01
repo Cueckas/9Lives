@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] Text life;
 
-    [SerializeField] GameObject testPrefab;
-
     [SerializeField] VoidEventChannel dieChannel;
 
     [SerializeField] PositionEventChannel positionChannel;
@@ -37,7 +35,8 @@ public class GameManager : MonoBehaviour
     {
         if (lifeNumber > 0)
         {
-            Instantiate(testPrefab, position, Quaternion.identity);
+            GameObject g = (GameObject) Resources.Load("Prefabs/Test_prefab");
+            Instantiate(g, position, Quaternion.identity);
         }
         
     }
