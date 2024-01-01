@@ -96,6 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLife: 10
-  numberEvent: {fileID: 11400000, guid: fa4d0f8415df12949b701796df21c872, type: 2}
+  timerEvent: {fileID: 11400000, guid: fa4d0f8415df12949b701796df21c872, type: 2}
   dieChannel: {fileID: 11400000, guid: 57ee27c88a436a8478bb0944767a6d86, type: 2}
   positionChannel: {fileID: 11400000, guid: 4b733820ed1ad064f9bba5185b6a7dd2, type: 2}
