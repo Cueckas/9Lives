@@ -25,11 +25,11 @@ namespace TarodevController
         public Vector2 FrameInput => _frameInput.Move;
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
-
+        public event Action Walking;
         #endregion
 
         private float _time;
-
+        private bool _walking;
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -73,12 +73,24 @@ namespace TarodevController
             HandleJump();
             HandleDirection();
             HandleGravity();
-            
+            HandleMove(); // handles Move Animations
             ApplyMovement();
         }
 
-        #region Collisions
+
+        public void HandleMove()
+        {
+            if (_frameVelocity.x > 0) { 
+                //_walking = true;
+                Walking?.Invoke();
+
+            }
+   
+        }
         
+
+        #region Collisions
+
         private float _frameLeftGrounded = float.MinValue;
         private bool _grounded;
 
@@ -207,6 +219,8 @@ namespace TarodevController
         public event Action<bool, float> GroundedChanged;
 
         public event Action Jumped;
+        //public event Action Walking;
+        public event Action Walking;
         public Vector2 FrameInput { get; }
     }
 }
