@@ -221,6 +221,7 @@ namespace TarodevController
         public event Action Jumped;
         //public event Action Walking;
         public event Action Walking;
+        //public event Action NoWalking;
         public Vector2 FrameInput { get; }
     }
 }
