@@ -86,9 +86,14 @@ namespace TarodevController
         private void OnWalking()
         {
             _anim.SetTrigger(WalkKey);
-            
-            //_anim.ResetTrigger(GroundedKey);
+            _anim.ResetTrigger(SlowDownKey);
+
         }
+
+        //bomb
+
+
+        //
 
         private void OnJumped()
         {
@@ -146,5 +151,7 @@ namespace TarodevController
         private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int WalkKey = Animator.StringToHash("Walking");
+        private static readonly int SlowDownKey = Animator.StringToHash("SlowingDown");
+
     }
 }
