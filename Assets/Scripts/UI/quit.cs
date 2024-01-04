@@ -23,6 +23,7 @@ public class quit : MonoBehaviour
     private void OnMouseUp()
     {
         transform.localScale = transform.localScale / 0.9f;
+        Application.Quit()
     }
 
 }
