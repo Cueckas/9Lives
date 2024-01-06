@@ -12,6 +12,9 @@ public class Timer : MonoBehaviour
     [SerializeField] VoidEventChannel middleAgeEventChannel;
     [SerializeField] VoidEventChannel oldAgeEventChannel;
 
+    //[SerializeField]
+    public HealthBar lifeBar;
+
     float time;
     float totalTime;
     bool start = false;
@@ -26,6 +29,8 @@ public class Timer : MonoBehaviour
         if (start)
         {
             time -= Time.fixedDeltaTime;
+
+            lifeBar.SetHealth(time);
             timeText.text = System.TimeSpan.FromSeconds(time).ToString(@"mm\:ss");
 
             // Check if time is more than 75% of total time
@@ -58,5 +63,7 @@ public class Timer : MonoBehaviour
         totalTime = set;
         time = set;
         start = true;
+        lifeBar.SetMaxHealth(set);
+       
     }
 }
