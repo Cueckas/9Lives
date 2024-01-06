@@ -11,6 +11,9 @@ public class Timer : MonoBehaviour
 
     [SerializeField] VoidEventChannel dieChannel;
 
+    //[SerializeField]
+    public HealthBar lifeBar;
+
     float time;
 
     bool start = false;
@@ -25,6 +28,8 @@ public class Timer : MonoBehaviour
         if (start)
         {
             time -= Time.fixedDeltaTime;
+
+            lifeBar.SetHealth(time);
             timeText.text = System.TimeSpan.FromSeconds(time).ToString(@"mm\:ss");
             if (time <= 0)
             {
@@ -41,5 +46,7 @@ public class Timer : MonoBehaviour
     {
         time = set;
         start = true;
+        lifeBar.SetMaxHealth(set);
+       
     }
 }
