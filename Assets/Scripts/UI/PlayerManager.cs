@@ -38,7 +38,7 @@ public class PlayerManager : MonoBehaviour
         oldAgeEventChannel.AddListener(BecomeOld);
     }
 
-    void BecomeYoung()
+    public void BecomeYoung()
     {
         // Adjust player attributes for the young phase
         scale = baseScale * 0.8f;
@@ -47,7 +47,7 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayerAppearance(); // Update player's appearance and capabilities
     }
 
-    void BecomeMiddleAged()
+    public void BecomeMiddleAged()
     {
         // Adjust player attributes for the middle-aged phase
         scale = baseScale * 1.2f;
@@ -56,7 +56,7 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayerAppearance(); // Update player's appearance and capabilities
     }
 
-    void BecomeOld()
+    public void BecomeOld()
     {
         // Adjust player attributes for the old age phase
         scale = baseScale;
@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayerAppearance(); // Update player's appearance and capabilities
     }
 
-    void UpdatePlayerAppearance()
+    public void UpdatePlayerAppearance()
     {
         // This method updates the player's appearance and capabilities
         transform.localScale = new Vector3(scale, scale, scale); // Adjust the player's scale
