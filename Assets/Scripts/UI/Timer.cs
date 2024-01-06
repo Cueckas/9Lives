@@ -15,9 +15,9 @@ public class Timer : MonoBehaviour
     //[SerializeField]
     public HealthBar lifeBar;
 
-    float time;
+    float time =10;
     float totalTime;
-    bool start = false;
+    bool start = true;
 
     void OnEnable()
     {
@@ -36,17 +36,17 @@ public class Timer : MonoBehaviour
             // Check if time is more than 75% of total time
             if (time > totalTime * 0.8f)
             {
-                youngEventChannel.Broadcast();
+                youngEventChannel?.Broadcast();
             }
             // Check if time is between 50% and 75% of total time
             else if (time > totalTime * 0.4f && time <= totalTime * 0.8f)
             {
-                middleAgeEventChannel.Broadcast();
+                middleAgeEventChannel?.Broadcast();
             }
             // Check if time is less than 50% of total time
             else if (time <= totalTime * 0.4f)
             {
-                oldAgeEventChannel.Broadcast();
+                oldAgeEventChannel?.Broadcast();
             }
 
             if (time <= 0)
