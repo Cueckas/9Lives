@@ -16,20 +16,30 @@ namespace TarodevController
         [SerializeField] private ScriptableStats _stats;
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
+        public GameObject _bomb;
+
         private FrameInput _frameInput;
         private Vector2 _frameVelocity;
         private bool _cachedQueryStartInColliders;
-
+        
         #region Interface
 
         public Vector2 FrameInput => _frameInput.Move;
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
         public event Action Walking;
+
+        //attack listeners
+        public event Action BombAttack;
+        public event Action BombWalk;
+        public event Action BombThrow;
+
+
         #endregion
 
         private float _time;
         private bool _walking;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody2D>();
@@ -50,11 +60,12 @@ namespace TarodevController
             {
                 JumpDown = Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.C),
                 JumpHeld = Input.GetButton("Jump") || Input.GetKey(KeyCode.C),
+            
                 Move = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"))
             };
 
             if (_stats.SnapInput)
-            {
+            {  
                 _frameInput.Move.x = Mathf.Abs(_frameInput.Move.x) < _stats.HorizontalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.x);
                 _frameInput.Move.y = Mathf.Abs(_frameInput.Move.y) < _stats.VerticalDeadZoneThreshold ? 0 : Mathf.Sign(_frameInput.Move.y);
             }
@@ -75,17 +86,27 @@ namespace TarodevController
             HandleGravity();
             HandleMove(); // handles Move Animations
             ApplyMovement();
+            HandleBombAttack();
         }
 
 
         public void HandleMove()
         {
-            if (_frameVelocity.x > 0) { 
+            if (_frameVelocity.x > 0 && !_frameInput.Attack) { 
                 //_walking = true;
                 Walking?.Invoke();
 
             }
    
+        }
+
+        public void HandleBombAttack()
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                BombAttack?.Invoke();
+            }
+
         }
         
 
@@ -209,6 +230,8 @@ namespace TarodevController
 
     public struct FrameInput
     {
+        public bool AttackHeld;
+        public bool Attack;
         public bool JumpDown;
         public bool JumpHeld;
         public Vector2 Move;
@@ -221,7 +244,11 @@ namespace TarodevController
         public event Action Jumped;
         //public event Action Walking;
         public event Action Walking;
-        //public event Action NoWalking;
+
+        public event Action BombAttack;
+        public event Action BombWalk;
+        public event Action BombThrow;
+
         public Vector2 FrameInput { get; }
     }
 }

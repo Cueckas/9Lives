@@ -7,12 +7,14 @@ namespace TarodevController
     /// </summary>
     public class PlayerAnimator : MonoBehaviour
     {
-        [Header("References")] [SerializeField]
+        [Header("References")]
+        [SerializeField]
         private Animator _anim;
 
         [SerializeField] private SpriteRenderer _sprite;
 
-        [Header("Settings")] [SerializeField, Range(1f, 3f)]
+        [Header("Settings")]
+        [SerializeField, Range(1f, 3f)]
         private float _maxIdleSpeed = 2;
 
         [SerializeField] private float _maxTilt = 5;
@@ -23,13 +25,15 @@ namespace TarodevController
         [SerializeField] private ParticleSystem _moveParticles;
         [SerializeField] private ParticleSystem _landParticles;
 
-        [Header("Audio Clips")] [SerializeField]
+        [Header("Audio Clips")]
+        [SerializeField]
         private AudioClip[] _footsteps;
 
         private AudioSource _source;
         private IPlayerController _player;
         private bool _grounded;
         private ParticleSystem.MinMaxGradient _currentGradient;
+
 
         private void Awake()
         {
@@ -42,6 +46,8 @@ namespace TarodevController
             _player.Jumped += OnJumped;
             _player.GroundedChanged += OnGroundedChanged;
             _player.Walking += OnWalking;
+            _player.BombAttack += OnBombAttack;
+         
             _moveParticles.Play();
         }
 
@@ -50,6 +56,9 @@ namespace TarodevController
             _player.Jumped -= OnJumped;
             _player.GroundedChanged -= OnGroundedChanged;
             _player.Walking -= OnWalking;
+            _player.BombAttack -= OnBombAttack;
+            
+          
             _moveParticles.Stop();
         }
 
@@ -86,14 +95,16 @@ namespace TarodevController
         private void OnWalking()
         {
             _anim.SetTrigger(WalkKey);
-            _anim.ResetTrigger(SlowDownKey);
 
         }
 
-        //bomb
-
-
-        //
+        //Attack is X
+        //Bomb Setup
+        private void OnBombAttack()
+        {
+            _anim.SetTrigger(BombAttackKey);
+        }
+    
 
         private void OnJumped()
         {
@@ -112,7 +123,7 @@ namespace TarodevController
         private void OnGroundedChanged(bool grounded, float impact)
         {
             _grounded = grounded;
-            
+
             if (grounded)
             {
                 DetectGroundColor();
@@ -151,7 +162,9 @@ namespace TarodevController
         private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int WalkKey = Animator.StringToHash("Walking");
-        private static readonly int SlowDownKey = Animator.StringToHash("SlowingDown");
+
+
+        private static readonly int BombAttackKey = Animator.StringToHash("AttackBomb");
 
     }
 }
