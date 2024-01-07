@@ -14771,6 +14771,9 @@ MonoBehaviour:
   timerEvent: {fileID: 11400000, guid: fa4d0f8415df12949b701796df21c872, type: 2}
   dieChannel: {fileID: 11400000, guid: 57ee27c88a436a8478bb0944767a6d86, type: 2}
   positionChannel: {fileID: 11400000, guid: 4b733820ed1ad064f9bba5185b6a7dd2, type: 2}
+  youngEventChannel: {fileID: 0}
+  middleAgeEventChannel: {fileID: 0}
+  oldAgeEventChannel: {fileID: 0}
 --- !u!1 &5251563984510151556
 GameObject:
   m_ObjectHideFlags: 0
@@ -24595,7 +24598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28de4f55dcd1c2547834a23974992d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
+  playerStats: {fileID: 11400000, guid: 05e6a06c5af93134ab98ff12e2c27265, type: 2}
   scale: 0
   speed: 0
   jumpHeight: 0

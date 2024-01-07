@@ -879,9 +879,9 @@ MonoBehaviour:
   timeText: {fileID: 1775703673}
   timerEvent: {fileID: 11400000, guid: fa4d0f8415df12949b701796df21c872, type: 2}
   dieChannel: {fileID: 11400000, guid: 57ee27c88a436a8478bb0944767a6d86, type: 2}
-  youngEventChannel: {fileID: 0}
-  middleAgeEventChannel: {fileID: 0}
-  oldAgeEventChannel: {fileID: 0}
+  youngEventChannel: {fileID: 11400000, guid: 818e62bc66e5db848b59ee22ae4f905b, type: 2}
+  middleAgeEventChannel: {fileID: 11400000, guid: 51d388de7b6d4724db07ffea034a4c8e, type: 2}
+  oldAgeEventChannel: {fileID: 11400000, guid: d02aea55e29eac341be04a0649c10187, type: 2}
   lifeBar: {fileID: 1464064816}
 --- !u!114 &126738575
 MonoBehaviour:
