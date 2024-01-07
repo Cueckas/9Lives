@@ -25,4 +25,9 @@ public class FollowObject : MonoBehaviour
         
         //Camera.main.transform.Translate(new Vector3(transform.xAxisValue, transform.yAxisValue, 0.0f));
     }
+
+    public void changeTarget( Transform target){
+
+        this.target = target;
+    }
 }

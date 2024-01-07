@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8343582092401665358}
   - component: {fileID: 8343582092401665359}
-  - component: {fileID: 8343582092401665456}
   m_Layer: 0
   m_Name: Test_prefab
   m_TagString: Untagged
@@ -83,19 +82,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &8343582092401665456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8343582092401665457}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 832b4b3e0c9b53b4b9b5d02fb5c7ce59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLife: 10
-  timerEvent: {fileID: 11400000, guid: fa4d0f8415df12949b701796df21c872, type: 2}
-  dieChannel: {fileID: 11400000, guid: 57ee27c88a436a8478bb0944767a6d86, type: 2}
-  positionChannel: {fileID: 11400000, guid: 4b733820ed1ad064f9bba5185b6a7dd2, type: 2}

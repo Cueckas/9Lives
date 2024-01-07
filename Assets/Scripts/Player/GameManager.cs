@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] GameObject deathmenu;
 
+    public GameObject main_camera;
+
     private bool isPaused = false;  
     void OnEnable()
     {
@@ -61,6 +63,15 @@ public class GameManager : MonoBehaviour
         {
             GameObject g = (GameObject) Resources.Load("Prefabs/Test_prefab");
             Instantiate(g, position, Quaternion.identity);
+
+            GameObject g1 = (GameObject) Resources.Load("Prefabs/Player");
+            //position will be a checkpoint
+            GameObject player = Instantiate(g1, new Vector3 (position.x,position.y + 0.5f, position.z), Quaternion.identity);
+
+            GameObject child = player.transform.GetChild(2).gameObject;
+
+            main_camera.GetComponent<FollowObject>().changeTarget(child.transform);
+        
         }
         
     }

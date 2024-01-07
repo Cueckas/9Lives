@@ -25,6 +25,8 @@ public class CatStats : MonoBehaviour
 
     [SerializeField] PositionEventChannel positionChannel;
     // Start is called before the first frame update
+
+
     void Start()
     {
         timerEvent.Broadcast(timeLife);
@@ -33,7 +35,7 @@ public class CatStats : MonoBehaviour
 
     void Die(){
         dieChannel.RemoveListener(Die);
-        positionChannel.Broadcast(transform.position);
+        positionChannel.Broadcast(transform.GetChild(2).position);
         Destroy(gameObject);
     }
 }
