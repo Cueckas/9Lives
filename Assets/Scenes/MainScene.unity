@@ -1562,6 +1562,9 @@ MonoBehaviour:
   dieChannel: {fileID: 11400000, guid: 57ee27c88a436a8478bb0944767a6d86, type: 2}
   positionChannel: {fileID: 11400000, guid: 4b733820ed1ad064f9bba5185b6a7dd2, type: 2}
   deathmenu: {fileID: 300228741}
+  youngEventChannel: {fileID: 0}
+  middleAgeEventChannel: {fileID: 0}
+  oldAgeEventChannel: {fileID: 0}
   main_camera: {fileID: 101467210}
 --- !u!4 &272090201
 Transform:
@@ -11411,5 +11414,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251563984504368157, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: timeLife
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5251563984504368157, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: youngEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 818e62bc66e5db848b59ee22ae4f905b, type: 2}
+    - target: {fileID: 5251563984504368157, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: oldAgeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: d02aea55e29eac341be04a0649c10187, type: 2}
+    - target: {fileID: 5251563984504368157, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: middleAgeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d388de7b6d4724db07ffea034a4c8e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}

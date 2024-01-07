@@ -24600,9 +24600,9 @@ MonoBehaviour:
   speed: 0
   jumpHeight: 0
   attackDamage: 0
-  youngEventChannel: {fileID: 0}
-  middleAgeEventChannel: {fileID: 0}
-  oldAgeEventChannel: {fileID: 0}
+  youngEventChannel: {fileID: 11400000, guid: 818e62bc66e5db848b59ee22ae4f905b, type: 2}
+  middleAgeEventChannel: {fileID: 11400000, guid: 51d388de7b6d4724db07ffea034a4c8e, type: 2}
+  oldAgeEventChannel: {fileID: 11400000, guid: d02aea55e29eac341be04a0649c10187, type: 2}
 --- !u!114 &5251563984865379390
 MonoBehaviour:
   m_ObjectHideFlags: 0

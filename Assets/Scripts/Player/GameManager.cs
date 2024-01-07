@@ -15,8 +15,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] PositionEventChannel positionChannel;
 
-
     [SerializeField] GameObject deathmenu;
+
+    [SerializeField] VoidEventChannel youngEventChannel;
+
+    [SerializeField] VoidEventChannel middleAgeEventChannel;
+
+    [SerializeField] VoidEventChannel oldAgeEventChannel;
 
     public GameObject main_camera;
 

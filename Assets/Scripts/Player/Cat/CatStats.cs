@@ -24,6 +24,13 @@ public class CatStats : MonoBehaviour
     [SerializeField] VoidEventChannel dieChannel;
 
     [SerializeField] PositionEventChannel positionChannel;
+
+    [SerializeField] VoidEventChannel youngEventChannel;
+
+    [SerializeField] VoidEventChannel middleAgeEventChannel;
+
+    [SerializeField] VoidEventChannel oldAgeEventChannel;
+
     // Start is called before the first frame update
 
 
