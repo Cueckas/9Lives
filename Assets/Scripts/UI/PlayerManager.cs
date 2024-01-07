@@ -72,4 +72,12 @@ public class PlayerManager : MonoBehaviour
         transform.localScale = new Vector3(scale, scale, scale); // Adjust the player's scale
         // Other relevant updates can be added here
     }
+
+    void OnDestroy()
+    {
+        youngEventChannel.RemoveListener(BecomeYoung);
+        middleAgeEventChannel.RemoveListener(BecomeMiddleAged);
+        oldAgeEventChannel.RemoveListener(BecomeOld);
+    }
+
 }
