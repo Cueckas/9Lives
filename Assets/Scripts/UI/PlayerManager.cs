@@ -69,7 +69,8 @@ public class PlayerManager : MonoBehaviour
     public void UpdatePlayerAppearance()
     {
         // This method updates the player's appearance and capabilities
-        transform.localScale = new Vector3(scale, scale, scale); // Adjust the player's scale
+        transform.GetChild(0).localScale = new Vector3(scale, scale, scale);
+         // Adjust the player's scale
         // Other relevant updates can be added here
     }
 
