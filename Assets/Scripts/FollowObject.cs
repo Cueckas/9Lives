@@ -9,7 +9,9 @@ public class FollowObject : MonoBehaviour
     public bool smooth = true;
     void Update()
     {
-        Vector3 targetPosition = target.transform.position;
+        if (target != null)
+        {
+            Vector3 targetPosition = target.transform.position;
         targetPosition.z = transform.position.z; // Maintain the current z position
 
 
@@ -20,6 +22,8 @@ public class FollowObject : MonoBehaviour
         else{
             transform.position = targetPosition;
         }
+        }
+        
         
         
         
