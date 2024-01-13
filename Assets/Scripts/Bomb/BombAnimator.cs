@@ -7,7 +7,7 @@ public class BombAnimator : MonoBehaviour
 {
     // Start is called before the first frame update
     
-    private Animator _anim;
+     private Animator _anim;
     //TransparencyChanger script = frozenScreen.GetComponent<TransparencyChanger>();
 
 

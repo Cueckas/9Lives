@@ -14,7 +14,7 @@ public class ScytheSpawn : MonoBehaviour
     private Transform scytheTransform;
     private Transform playerTransform;
 
-    public KeyCode chargeKey = KeyCode.X;
+    public KeyCode chargeKey;
 
     public float spawnCooldown = 3f;
 
@@ -38,7 +38,7 @@ public class ScytheSpawn : MonoBehaviour
     
 
 
-    private GameObject referenceBomb;
+    private GameObject referenceScythe;
 
 
     // Start is called before the first frame update
@@ -57,7 +57,7 @@ public class ScytheSpawn : MonoBehaviour
         if (Input.GetKey(chargeKey))
         {
 
-            //Debug.Log(spawnedBomb);
+            Debug.Log(spawnedScythe);
 
             if (!spawnedScythe)
             {
@@ -67,7 +67,7 @@ public class ScytheSpawn : MonoBehaviour
                 isCharging = true;
                 chargeTime += Time.deltaTime;
                 chargeTime = Mathf.Clamp(chargeTime, 0.0f, maxChargeTime);
-                //Spawn();
+                Spawn();
 
                 spawnedScythe = true;
             }
@@ -85,15 +85,15 @@ public class ScytheSpawn : MonoBehaviour
 
             // Calculate the position along the arc using sine and cosine functions
             //float x = amplitude * Mathf.Sin(frequency * elapsedTime * speed);
-            float x = speed * elapsedTime;
+            float x = playerTransform.position.x;
             //float y = amplitude * Mathf.Cos(frequency * elapsedTime * speed);
-            float y = amplitude * Mathf.Sin(frequency * x);
+            float y = playerTransform.position.y;
 
-            if (referenceBomb != null)
+            if (referenceScythe != null)
             {
 
-                Debug.Log(referenceBomb.transform.position);              // Update the object's position
-                Transform objectTransform = referenceBomb.transform;
+                 // Update the object's position
+                Transform objectTransform = referenceScythe.transform;
 
                 objectTransform.position = initialScythePosition + new Vector3(x, y, 0f);
 
@@ -109,4 +109,44 @@ public class ScytheSpawn : MonoBehaviour
         }
 
     }
+
+    void Spawn()
+    {
+        //Vector3 SpawnPoint = playerTransform;
+
+        
+        Debug.Log(playerTransform.position);
+
+        Vector3 ScythePosition = new Vector3(playerTransform.position.x , playerTransform.position.y, playerTransform.position.z);
+        // Instantiate the prefab at the specified spawn point
+        GameObject spawnedPrefab = Instantiate(Scythe, ScythePosition, playerTransform.rotation);
+        referenceScythe = spawnedPrefab;
+        initialScythePosition = referenceScythe.transform.position;
+        startTime = Time.time;
+        
+        Destroy(referenceScythe, 1.1f);
+
+        // Optionally, you can do something with the spawnedPrefab, like setting its properties or adding components.
+        // Example: spawnedPrefab.GetComponent<YourScript>().YourMethod();
+
+        // Optionally, you can destroy the spawnedPrefab after a certain time
+        //referenceBomb = spawnedPrefab;
+
+
+        if (Input.GetKeyUp(chargeKey) && isCharging)
+        {
+            // Execute the charged attack based on charge time
+            //throw bomb explode
+            // Reset charge variables
+
+            Debug.Log("Charging");
+            isCharging = false;
+            chargeTime = 0.0f;
+            //Destroy(spawnedPrefab.gameObject, 1f);
+            
+        }
+
+    }
+
+
 }
