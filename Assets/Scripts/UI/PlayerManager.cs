@@ -1,5 +1,6 @@
 using UnityEngine;
-using TarodevController; // Import the TarodevController namespace
+using TarodevController;
+using System; // Import the TarodevController namespace
 
 public class PlayerManager : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     public VoidEventChannel middleAgeEventChannel;
     public VoidEventChannel oldAgeEventChannel;
 
+    CapsuleCollider2D [] colliders = null;
+
     void Start()
     {
         // Initialize player attributes from ScriptableStats
@@ -36,6 +39,8 @@ public class PlayerManager : MonoBehaviour
         youngEventChannel.AddListener(BecomeYoung);
         middleAgeEventChannel.AddListener(BecomeMiddleAged);
         oldAgeEventChannel.AddListener(BecomeOld);
+
+        colliders = GetComponents<CapsuleCollider2D>();
     }
 
     public void BecomeYoung()
@@ -44,7 +49,11 @@ public class PlayerManager : MonoBehaviour
         scale = baseScale * 0.8f;
         speed = baseSpeed * 1.2f;
         jumpHeight = baseJumpHeight * 1.2f;
-        UpdatePlayerAppearance(); // Update player's appearance and capabilities
+
+        //GetComponents<CapsuleCollider2D>()[0].
+        //GetComponents<CapsuleCollider2D>()[1].enabled = true;
+        ModifyColliderSize(GetComponent<CapsuleCollider2D>(),false);
+        UpdatePlayerAppearance(true); // Update player's appearance and capabilities
     }
 
     public void BecomeMiddleAged()
@@ -53,7 +62,10 @@ public class PlayerManager : MonoBehaviour
         scale = baseScale * 1.2f;
         speed = baseSpeed; // Keep base speed
         jumpHeight = baseJumpHeight; // Keep base jump height
-        UpdatePlayerAppearance(); // Update player's appearance and capabilities
+        //GetComponents<CapsuleCollider2D>()[0].enabled = true;
+        //GetComponents<CapsuleCollider2D>()[1].enabled = false;
+        ModifyColliderSize(GetComponent<CapsuleCollider2D>(),true);
+        UpdatePlayerAppearance(false); // Update player's appearance and capabilities
     }
 
     public void BecomeOld()
@@ -63,13 +75,22 @@ public class PlayerManager : MonoBehaviour
         speed = baseSpeed * 0.8f;
         jumpHeight = baseJumpHeight * 0.8f;
         attackDamage = baseAttackDamage * 1.2f;
-        UpdatePlayerAppearance(); // Update player's appearance and capabilities
+        UpdatePlayerAppearance(null); // Update player's appearance and capabilities
     }
 
-    public void UpdatePlayerAppearance()
+    public void UpdatePlayerAppearance(bool? young)
     {
         // This method updates the player's appearance and capabilities
         transform.GetChild(0).localScale = new Vector3(scale, scale, scale);
+        if(young == true){
+            transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, transform.GetChild(0).position.y + 0.2f,transform.GetChild(0).position.z);
+        }
+        else if(young == false){
+            transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, transform.GetChild(0).position.y - 0.2f,transform.GetChild(0).position.z);
+        }
+        
+        
+        
          // Adjust the player's scale
         // Other relevant updates can be added here
     }
@@ -79,6 +100,18 @@ public class PlayerManager : MonoBehaviour
         youngEventChannel.RemoveListener(BecomeYoung);
         middleAgeEventChannel.RemoveListener(BecomeMiddleAged);
         oldAgeEventChannel.RemoveListener(BecomeOld);
+    }
+
+    void ModifyColliderSize(CapsuleCollider2D collider, bool increase)
+    {
+        if (!increase)
+        {
+            // Set the new size of the capsule collider
+            collider.size = collider.size/2;
+        }
+        else{
+            collider.size = collider.size*2;
+        }
     }
 
 }
