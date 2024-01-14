@@ -144,13 +144,6 @@ public class SpawnBomb : MonoBehaviour
             
         }
 
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            //Vector3 slerped = Vector3.Slerp(bombTransform.position, bombTransform.position, 0.5f);
-            //bombTransform.transform.position = slerped;
-
-            //Destroy(spawnedPrefab, 5f);
-        }
     }
 
 

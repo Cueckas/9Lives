@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         //cria novo gato e guarda na lista
         kittens.Add(kitten);
+        kittens.Add(kitten.Copy());
         lifeNumber = kittens.Count;
         life.text = lifeNumber.ToString("D2");
     }
@@ -150,7 +151,7 @@ public class GameManager : MonoBehaviour
     public List<Status> GetKittenList()
     {
         List<Status> result = new List<Status>();
-        result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
+        //result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
         result.AddRange(kittens);
         return result;
     }
