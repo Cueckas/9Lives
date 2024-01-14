@@ -42,6 +42,10 @@ public class GameMenu : MonoBehaviour
     {
         // Toggle the menu panel and pause/resume the game
         isPaused = !isPaused;
+        if (collectionOpen)
+        {
+            ToggleCollection();
+        }
         SetMenuPanelActive(isPaused);
         Time.timeScale = isPaused ? 0f : 1f;
 

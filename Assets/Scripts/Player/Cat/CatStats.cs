@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatStats : MonoBehaviour
 {
 
     [SerializeField] float timeLife;
 
-    [SerializeField] float hp;
+    [SerializeField] int hp;
 
     [SerializeField] float speed;
 
@@ -33,12 +35,25 @@ public class CatStats : MonoBehaviour
 
     public GenerateNextGeneration gg;
 
+    public HealthBar lifeBar;
+    public Text lifeCounter;
+
+    private int curHP;
+
 
     void Start()
     {
         timerEvent.Broadcast(timeLife);
         dieChannel.AddListener(Die);
-        gg.setFather(this.GetStatus());
+        
+        if (lifeCounter != null)
+        {
+            lifeBar.SetMaxHealth(hp);
+            lifeCounter.text = $"{hp}/{hp}";
+            gg.setFather(GetStatus());
+        }
+        curHP = hp;
+        
     }
 
     void Die(){
@@ -47,10 +62,10 @@ public class CatStats : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void changeStatus(Status s)
+    void ChangeStatus(Status s)
     {
         this.timeLife = s.timeLife;
-        this.hp = s.hp;
+        this.hp = (int)s.hp;
         this.speed = s.speed;
         this.jumpForce = s.jumpForce;
         this.attack = s.attack;
@@ -58,8 +73,27 @@ public class CatStats : MonoBehaviour
         this.attackRate = s.attackRate;
     }
 
+    public void Setup(GenerateNextGeneration gg, HealthBar lifeBar, Text lifeCounter, Status s)
+    {
+        ChangeStatus(s);
+        gg.setFather(GetStatus());
+        lifeBar.SetMaxHealth(hp);
+        lifeCounter.text = $"{hp}/{hp}";
+    }
+
     public Status GetStatus()
     {
         return new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed,attackRate);
+    }
+
+    public void TakingDamage(int damage)
+    {
+        curHP -= damage;
+        lifeCounter.text = $"{curHP}/{hp}";
+        lifeBar.SetHealth(curHP);
+        if (curHP <= 0)
+        {
+            dieChannel.Broadcast();
+        }
     }
 }
