@@ -16,7 +16,6 @@ namespace TarodevController
         [SerializeField] private ScriptableStats _stats;
         private Rigidbody2D _rb;
         private CapsuleCollider2D _col;
-        public GameObject _bomb;
 
         private FrameInput _frameInput;
         private Vector2 _frameVelocity;
@@ -28,11 +27,8 @@ namespace TarodevController
         public event Action<bool, float> GroundedChanged;
         public event Action Jumped;
         public event Action Walking;
+        public event Action Scythe;
 
-        //attack listeners
-        public event Action BombAttack;
-        public event Action BombWalk;
-        public event Action BombThrow;
 
 
         #endregion
@@ -80,13 +76,12 @@ namespace TarodevController
         private void FixedUpdate()
         {
             CheckCollisions();
-
             HandleJump();
             HandleDirection();
             HandleGravity();
             HandleMove(); // handles Move Animations
             ApplyMovement();
-            HandleBombAttack();
+            HandleScytheAttack();
         }
 
 
@@ -100,14 +95,15 @@ namespace TarodevController
    
         }
 
-        public void HandleBombAttack()
+        public void HandleScytheAttack()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.V))
             {
-                BombAttack?.Invoke();
+                Scythe?.Invoke();
             }
 
         }
+
         
 
         #region Collisions
@@ -235,6 +231,7 @@ namespace TarodevController
         public bool JumpDown;
         public bool JumpHeld;
         public Vector2 Move;
+        public bool Scythe;
     }
 
     public interface IPlayerController
@@ -245,9 +242,7 @@ namespace TarodevController
         //public event Action Walking;
         public event Action Walking;
 
-        public event Action BombAttack;
-        public event Action BombWalk;
-        public event Action BombThrow;
+        public event Action Scythe;
 
         public Vector2 FrameInput { get; }
     }

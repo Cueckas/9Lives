@@ -89,10 +89,10 @@ public class SpawnBomb : MonoBehaviour
 
             if (referenceBomb != null){
 
-                Debug.Log(referenceBomb.transform.position);              // Update the object's position
+                //Debug.Log(referenceBomb.transform.position);              // Update the object's position
                 Transform objectTransform = referenceBomb.transform;
 
-                objectTransform.position = initialBombPosition + new Vector3(x, y, 0f);
+                objectTransform.position = initialBombPosition; //+ new Vector3(x, y, 0f);
 
                 //objectTransform.position = Vector3(x, y, 0f) + 
 
@@ -113,7 +113,7 @@ public class SpawnBomb : MonoBehaviour
 
         Debug.Log(playerTransform.position);
         
-        Vector3 BombPosition = new Vector3(playerTransform.position.x, playerTransform.position.y, playerTransform.position.z);
+        Vector3 BombPosition = new Vector3(playerTransform.position.x, playerTransform.position.y + 0.2f, playerTransform.position.z);
         // Instantiate the prefab at the specified spawn point
         GameObject spawnedPrefab = Instantiate(Bomb, BombPosition, playerTransform.rotation);
         referenceBomb = spawnedPrefab;
@@ -122,7 +122,7 @@ public class SpawnBomb : MonoBehaviour
         //Vector3 position = new Vector3(1.0f, 2.0f, 3.0f);
         // Vector3 slerped = Vector3.Slerp(BombPosition, bombTransform.position * chargeTime, 0.5f);
         //bombTransform.transform.position = slerped;
-        Destroy(referenceBomb, 1.1f);
+        Destroy(referenceBomb, 1.8f);
 
         // Optionally, you can do something with the spawnedPrefab, like setting its properties or adding components.
         // Example: spawnedPrefab.GetComponent<YourScript>().YourMethod();

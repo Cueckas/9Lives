@@ -46,7 +46,7 @@ namespace TarodevController
             _player.Jumped += OnJumped;
             _player.GroundedChanged += OnGroundedChanged;
             _player.Walking += OnWalking;
-            _player.BombAttack += OnBombAttack;
+            _player.Scythe += onScytheAttack;
          
             _moveParticles.Play();
         }
@@ -56,7 +56,7 @@ namespace TarodevController
             _player.Jumped -= OnJumped;
             _player.GroundedChanged -= OnGroundedChanged;
             _player.Walking -= OnWalking;
-            _player.BombAttack -= OnBombAttack;
+            _player.Scythe -= onScytheAttack;
             
           
             _moveParticles.Stop();
@@ -92,19 +92,21 @@ namespace TarodevController
             var runningTilt = _grounded ? Quaternion.Euler(0, 0, _maxTilt * _player.FrameInput.x) : Quaternion.identity;
             _anim.transform.up = Vector3.RotateTowards(_anim.transform.up, runningTilt * Vector2.up, _tiltSpeed * Time.deltaTime, 0f);
         }
+
         private void OnWalking()
         {
             _anim.SetTrigger(WalkKey);
 
         }
 
+        private void onScytheAttack(){
+
+            _anim.SetTrigger(ScytheKey);
+
+        }
+
         //Attack is X
         //Bomb Setup
-        private void OnBombAttack()
-        {
-            _anim.SetTrigger(BombAttackKey);
-        }
-    
 
         private void OnJumped()
         {
@@ -162,9 +164,7 @@ namespace TarodevController
         private static readonly int IdleSpeedKey = Animator.StringToHash("IdleSpeed");
         private static readonly int JumpKey = Animator.StringToHash("Jump");
         private static readonly int WalkKey = Animator.StringToHash("Walking");
-
-
-        private static readonly int BombAttackKey = Animator.StringToHash("AttackBomb");
+        private static readonly int ScytheKey = Animator.StringToHash("AttackScythe");
 
     }
 }
