@@ -76,9 +76,11 @@ namespace TarodevController
         private void FixedUpdate()
         {
             CheckCollisions();
+            HandleWallClimbing();
             HandleJump();
-            HandleDirection();
+            HandleDirection();       
             HandleGravity();
+            
             HandleMove(); // handles Move Animations
             ApplyMovement();
             HandleScytheAttack();
@@ -158,6 +160,7 @@ namespace TarodevController
 
         private void HandleJump()
         {
+            
             if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.velocity.y > 0) _endedJumpEarly = true;
 
             if (!_jumpToConsume && !HasBufferedJump) return;
@@ -200,6 +203,10 @@ namespace TarodevController
 
         private void HandleGravity()
         {
+            if (isWallMove)
+            {
+                return;
+            }
             if (_grounded && _frameVelocity.y <= 0f)
             {
                 _frameVelocity.y = _stats.GroundingForce;
@@ -222,6 +229,56 @@ namespace TarodevController
             if (_stats == null) Debug.LogWarning("Please assign a ScriptableStats asset to the Player Controller's Stats slot", this);
         }
 #endif
+
+
+    //New Part 
+    bool isLeftWall, isRightWall;
+    public Vector3 wallOffset;
+    public LayerMask wallLayer;
+    public bool isWallMove;
+    void Wallcheck()
+    {
+        isLeftWall = Physics2D.OverlapCircle(transform.position - wallOffset, 0.1f, wallLayer);
+        isRightWall = Physics2D.OverlapCircle(transform.position + wallOffset, 0.1f, wallLayer);
+        isWallMove = isLeftWall || isRightWall;
+    }
+
+    void HandleWallClimbing()
+    {
+        Wallcheck();
+        if (isWallMove)
+        {
+            _grounded = isWallMove;
+            float playerInput = Input.GetAxis("Vertical");
+            if (playerInput > 0)
+            {
+                WallClimb();
+            }
+            else if (playerInput < 0)
+            {
+                WallSlide();
+            }
+            else
+            {
+                WallGrab();
+            }
+        }
+    }
+
+    void WallClimb()
+    {
+        _frameVelocity.y = 1;
+    }
+
+    void WallSlide()
+    {
+        _frameVelocity.y = _stats.GroundingForce;
+    }
+
+    void WallGrab()
+    {
+        _frameVelocity.y = 0;
+    }
     }
 
     public struct FrameInput
