@@ -10,15 +10,23 @@ public class EnemyPatrolAir : MonoBehaviour
     public float chaseDistance;
     bool facingLeft;
     public float speed_patrol;
+    //public LayerMask platformLayer;
 
     public float stopDistance;      // How close we get before moving to the next patrol point
     public Vector2[] patrolPoints;  // List of patrol points we will go between
 
     private int currentPoint = 0;
 
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        Physics2D.IgnoreLayerCollision(8, 7, true);
+
+       
+        
+    
     }
 
     void Update()
@@ -30,7 +38,8 @@ public class EnemyPatrolAir : MonoBehaviour
             Chase();
         }
         else
-        {
+        {   
+            
             Patrol();
         }
     }
