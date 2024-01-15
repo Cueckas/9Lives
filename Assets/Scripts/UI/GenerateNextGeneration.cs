@@ -50,6 +50,17 @@ public class GenerateNextGeneration : MonoBehaviour
     public void SetMother(int mother)
     {
         this.motherType = mother;
-        gm.togglechooseMenu();
+        //gm.togglechooseMenu();    //apresenta o menu de escolha
+
+        //auto give next gen
+        MakeNextGen();
+        gm.NewGen(catOne,this);
+    }
+
+    public void MakeNextGen()
+    {
+        catOne = father.Copy();
+        catOne.RandomAllStatus(0.9f, 1.1f);
+        catOne.RandomSingleStatus(1.1f,1.3f,motherType);
     }
 }

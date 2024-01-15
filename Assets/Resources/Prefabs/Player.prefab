@@ -19857,7 +19857,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeLife: 10
-  hp: 0
+  hp: 100
   speed: 0
   jumpForce: 0
   attack: 0
@@ -19870,6 +19870,8 @@ MonoBehaviour:
   middleAgeEventChannel: {fileID: 11400000, guid: 51d388de7b6d4724db07ffea034a4c8e, type: 2}
   oldAgeEventChannel: {fileID: 11400000, guid: d02aea55e29eac341be04a0649c10187, type: 2}
   gg: {fileID: 0}
+  lifeBar: {fileID: 0}
+  lifeCounter: {fileID: 0}
 --- !u!1 &1288615785457790437
 GameObject:
   m_ObjectHideFlags: 0

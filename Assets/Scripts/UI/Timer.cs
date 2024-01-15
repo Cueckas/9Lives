@@ -12,7 +12,7 @@ public class Timer : MonoBehaviour
     [SerializeField] VoidEventChannel middleAgeEventChannel;
     [SerializeField] VoidEventChannel oldAgeEventChannel;
 
-    public HealthBar lifeBar;
+    public HealthBar timeBar;
 
     float time = 10;
     float totalTime;
@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
         if (start)
         {
             time -= Time.fixedDeltaTime;
-            lifeBar.SetHealth(time);
+            timeBar.SetHealth(time);
             timeText.text = System.TimeSpan.FromSeconds(time).ToString(@"mm\:ss");
 
             if (time > totalTime * 0.8f && !triggeredYoung)
@@ -69,6 +69,6 @@ public class Timer : MonoBehaviour
         time = set;
         start = true;
         triggeredYoung = triggeredMiddle = triggeredOld = false;
-        lifeBar.SetMaxHealth(set);
+        timeBar.SetMaxHealth(set);
     }
 }

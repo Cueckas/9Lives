@@ -28,9 +28,16 @@ public class GameManager : MonoBehaviour
 
     public GameObject main_camera;
 
+    public GameObject curPlayer;
+
+    public HealthBar lifeBar;
+
+    public GenerateNextGeneration gg;
+    public Text lifeCounter;
+
     private bool isPaused = false; 
 
-    public GameObject curPlayer;
+    
 
     private List<Status> kittens; 
     private Vector3 DiePosition;
@@ -62,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         //cria novo gato e guarda na lista
         kittens.Add(kitten);
+        kittens.Add(kitten.Copy());
         lifeNumber = kittens.Count;
         life.text = lifeNumber.ToString("D2");
     }
@@ -103,7 +111,7 @@ public class GameManager : MonoBehaviour
         curPlayer = player;
         GameObject child = player.transform.GetChild(2).gameObject;
         main_camera.GetComponent<FollowObject>().changeTarget(child.transform);
-        player.GetComponent<CatStats>().changeStatus(kittens[id]);
+        player.GetComponent<CatStats>().Setup(gg,lifeBar,lifeCounter,kittens[id]);
         kittens.RemoveAt(id);
     }
 
@@ -150,7 +158,7 @@ public class GameManager : MonoBehaviour
     public List<Status> GetKittenList()
     {
         List<Status> result = new List<Status>();
-        result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
+        //result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
         result.AddRange(kittens);
         return result;
     }
