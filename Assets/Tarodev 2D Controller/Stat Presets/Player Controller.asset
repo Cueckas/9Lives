@@ -20,9 +20,9 @@ MonoBehaviour:
   HorizontalDeadZoneThreshold: 0.101
   MaxSpeed: 5.9
   Acceleration: 33
-  GroundDeceleration: 29.8
+  GroundDeceleration: 34.76
   AirDeceleration: 25
-  GroundingForce: -1.46
+  GroundingForce: -1.55
   GrounderDistance: 0.142
   JumpPower: 12
   MaxFallSpeed: 17.5
