@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
     public List<Status> GetRandomKittens()
     {
         List<Status> result = new List<Status>();
-        if(lifeNumber == 2)
+        if(lifeNumber == 1)
         {
             for (int i = 0; i < 2; i++)
             {
