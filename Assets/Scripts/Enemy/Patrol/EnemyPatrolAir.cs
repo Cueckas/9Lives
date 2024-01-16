@@ -1,4 +1,5 @@
 using System.Collections;
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class EnemyPatrolAir : MonoBehaviour
@@ -12,6 +13,8 @@ public class EnemyPatrolAir : MonoBehaviour
     public float speed_patrol;
     //public LayerMask platformLayer;
 
+    public bool isGhost = false;
+
     public float stopDistance;      // How close we get before moving to the next patrol point
     public Vector2[] patrolPoints;  // List of patrol points we will go between
 
@@ -23,22 +26,49 @@ public class EnemyPatrolAir : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         Physics2D.IgnoreLayerCollision(8, 7, true);
+        Physics2D.IgnoreLayerCollision(8, 8, true);
+
+        FindPlayer();
+
+
     
+    }
+
+        void FindPlayer()
+    {
+        // Find the player object using the specified tag
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        // Check if the player object exists
+        if (player != null)
+        {
+            Debug.Log("Player Found");
+            target = player.transform;
+        }
     }
 
     void Update()
     {
-        float distanceToPlayer = Vector2.Distance(transform.position, target.position);
+         if(target == null){
+            FindPlayer();
+        }
 
-        if (distanceToPlayer < chaseDistance)
-        {
-            Chase();
-        }
-        else
-        {   
-            
-            Patrol();
-        }
+        else{   
+
+            float distanceToPlayer = Vector2.Distance(transform.position, target.position);
+
+            if (distanceToPlayer < chaseDistance)
+            {
+                Chase();
+            }
+            else
+            {   
+                if(!isGhost){
+                Patrol();
+                }
+            }
+
+        } 
     }
 
     void Chase()

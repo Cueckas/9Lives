@@ -39,6 +39,8 @@ public class GameManager : MonoBehaviour
     public Text lifeCounter;
     public Text coinCounter;
 
+    public static event System.Action OnPlayerRespawn;
+
     bool isPaused = false; 
     int lifeNumber;
     int coinNumber = 0;
@@ -175,5 +177,10 @@ public class GameManager : MonoBehaviour
     internal void setSavePoint(Vector3 position)
     {
         DiePosition = position;
+    }
+
+     public static void PlayerRespawned()
+    {
+        OnPlayerRespawn?.Invoke();
     }
 }
