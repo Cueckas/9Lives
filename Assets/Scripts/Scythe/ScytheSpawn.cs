@@ -35,7 +35,9 @@ public class ScytheSpawn : MonoBehaviour
 
     private float startTime;
     private Vector3 initialScythePosition;
-    
+    private bool facingRight = false;
+    private bool alive = false;
+    //float horizontalInput = Input.GetAxis("Horizontal");
 
 
     private GameObject referenceScythe;
@@ -53,17 +55,22 @@ public class ScytheSpawn : MonoBehaviour
         playerTransform = Player.transform;
         // Example: Spawn the prefab when the space key is pressed
         //Debug.Log(Player.transform.position);
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            facingRight = Player.transform.GetChild(0).GetComponent<TarodevController.PlayerAnimator>().HandleAnimeFlip();
+            
+        }
 
         if (Input.GetKey(chargeKey))
         {
 
-            Debug.Log(spawnedScythe);
+            //Debug.Log(spawnedScythe);
 
             if (!spawnedScythe)
             {
                 cooldownTimer = spawnCooldown;
                 // Start or continue charging
-                Debug.Log("eNTERED UPDATE KEY PRSSED");
+                
                 isCharging = true;
                 chargeTime += Time.deltaTime;
                 chargeTime = Mathf.Clamp(chargeTime, 0.0f, maxChargeTime);
@@ -71,7 +78,6 @@ public class ScytheSpawn : MonoBehaviour
 
                 spawnedScythe = true;
             }
-
 
 
             //pawn();
@@ -93,9 +99,12 @@ public class ScytheSpawn : MonoBehaviour
             {
 
                  // Update the object's position
-                Transform objectTransform = referenceScythe.transform;
+                
 
-                objectTransform.position = initialScythePosition + new Vector3(x, y, 0f);
+                referenceScythe.transform.position += new Vector3(x,y-1f,0f);
+                
+
+                //+ new Vector3(x-0., y - 1.4f, 0f);
 
                 //objectTransform.position = Vector3(x, y, 0f) + 
 
@@ -110,6 +119,26 @@ public class ScytheSpawn : MonoBehaviour
 
     }
 
+    void MoveToRight()
+    {
+        Debug.Log("entrei no MoveRight");
+        
+    }
+
+    void MoveToLeft()
+    {
+        Transform objectTransform = referenceScythe.transform;
+
+        objectTransform.position = initialScythePosition + new Vector3(playerTransform.position.x - 0.5f, playerTransform.position.y- 1f, 0f);
+    }
+
+    void Flip()
+    {   
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        
+    }
+
+
     void Spawn()
     {
         //Vector3 SpawnPoint = playerTransform;
@@ -117,14 +146,36 @@ public class ScytheSpawn : MonoBehaviour
         
         Debug.Log(playerTransform.position);
 
-        Vector3 ScythePosition = new Vector3(playerTransform.position.x , playerTransform.position.y, playerTransform.position.z);
+        Vector3 ScythePosition = new Vector3(playerTransform.position.x , playerTransform.position.y , playerTransform.position.z);
         // Instantiate the prefab at the specified spawn point
-        GameObject spawnedPrefab = Instantiate(Scythe, ScythePosition, playerTransform.rotation);
-        referenceScythe = spawnedPrefab;
-        initialScythePosition = referenceScythe.transform.position;
+        GameObject referenceScythe = Instantiate(Scythe, ScythePosition, playerTransform.rotation);
+        referenceScythe.transform.parent = playerTransform;
+
         startTime = Time.time;
-        
-        Destroy(referenceScythe, 1.1f);
+
+        if (facingRight)
+        {   
+            Debug.Log("entrei no facingRight");
+           
+            //MoveToRight();
+            Transform objectTransform = referenceScythe.transform;
+
+            referenceScythe.transform.position = new Vector3(playerTransform.position.x + 0.1f, playerTransform.position.y - 1.2f, 0f);
+            referenceScythe.transform.localScale = new Vector3(-referenceScythe.transform.localScale.x, referenceScythe.transform.localScale.y, referenceScythe.transform.localScale.z);
+
+        }
+
+        else
+        {
+            
+
+            referenceScythe.transform.position = new Vector3(playerTransform.position.x - 0.1f, playerTransform.position.y - 1.2f, 0f);
+
+            Debug.Log("entrei no facingRight=false");
+            //MoveToLeft();
+        }
+
+        Destroy(referenceScythe, 0.5f);
 
         // Optionally, you can do something with the spawnedPrefab, like setting its properties or adding components.
         // Example: spawnedPrefab.GetComponent<YourScript>().YourMethod();
@@ -145,6 +196,7 @@ public class ScytheSpawn : MonoBehaviour
             //Destroy(spawnedPrefab.gameObject, 1f);
             
         }
+
 
     }
 

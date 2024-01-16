@@ -23,9 +23,6 @@ public class EnemyPatrolAir : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         Physics2D.IgnoreLayerCollision(8, 7, true);
-
-       
-        
     
     }
 

@@ -35,7 +35,7 @@ public class Timer : MonoBehaviour
         if (start)
         {
             time -= Time.fixedDeltaTime;
-            timeBar.SetHealth(time);
+            //timeBar.SetHealth(time);
             timeText.text = System.TimeSpan.FromSeconds(time).ToString(@"mm\:ss");
 
             if (time > totalTime * 0.8f && !triggeredYoung)
@@ -69,6 +69,6 @@ public class Timer : MonoBehaviour
         time = set;
         start = true;
         triggeredYoung = triggeredMiddle = triggeredOld = false;
-        timeBar.SetMaxHealth(set);
+        //timeBar.SetMaxHealth(set);
     }
 }

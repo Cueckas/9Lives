@@ -115,8 +115,8 @@ public class SpawnBomb : MonoBehaviour
         
         Vector3 BombPosition = new Vector3(playerTransform.position.x, playerTransform.position.y + 0.2f, playerTransform.position.z);
         // Instantiate the prefab at the specified spawn point
-        GameObject spawnedPrefab = Instantiate(Bomb, BombPosition, playerTransform.rotation);
-        referenceBomb = spawnedPrefab;
+        GameObject referenceBomb = Instantiate(Bomb, BombPosition, playerTransform.rotation);
+        
         initialBombPosition = referenceBomb.transform.position;
         startTime = Time.time;
         //Vector3 position = new Vector3(1.0f, 2.0f, 3.0f);

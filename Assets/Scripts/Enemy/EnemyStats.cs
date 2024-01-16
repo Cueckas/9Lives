@@ -10,13 +10,14 @@ public class EnemyStats : MonoBehaviour
     //public gameObject Player;
 
     private float currentHp;
+    public bool alive;
 
 
     // Start is called before the first frame update
     void Start()
     {
         currentHp = fullHp;
-          
+        alive = true;
     }
 
     // Update is called once per frame
@@ -30,18 +31,20 @@ public class EnemyStats : MonoBehaviour
     {
         // Check if the colliding object has a Rigidbody2D component
         Physics2D.IgnoreLayerCollision(8, 7, true);
-        
+        Physics2D.IgnoreLayerCollision(9, 6, true);
+
 
         Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
         //bool grounded = collision.gameObject.GetComponent<PlayerController>();
         //PhysicsMaterial2D physicsMaterial2D = collision.sharedMaterial;
         //Collider2D collider2D = collision.collider;
+
         BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
         PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
 
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
 
-        Debug.Log(playerRigidbody != null && collision.gameObject.CompareTag("Player"));
+       
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player"))
         {
             // Check if the player is moving downwards (jumping on top)
@@ -71,6 +74,14 @@ public class EnemyStats : MonoBehaviour
     void Die()
     {
         // Add any death-related logic here (e.g., play death animation, destroy GameObject, etc.)
+        alive = false;
         Destroy(gameObject);
     }
-}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Die();
+    }
+
+
+}   

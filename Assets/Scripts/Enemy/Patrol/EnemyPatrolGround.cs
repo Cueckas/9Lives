@@ -24,7 +24,7 @@ public class EnemyPatrolGround : MonoBehaviour
     private int currentPoint = 0;       // Index of the current point we're moving towards
     private Rigidbody2D ourRigidbody;   // The rigidbody attached to this object
     private float ownHp;
-    private bool detected = false;
+    public bool detected = false;
     private Vector2 originalPosition;
     
 
