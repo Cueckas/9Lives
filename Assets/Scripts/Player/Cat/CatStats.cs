@@ -57,7 +57,8 @@ public class CatStats : MonoBehaviour
             gg.setFather(GetStatus());
         }
         curHP = hp;
-        
+        isInvicible = true;
+        invicibleTime = 3.0f;
     }
     void FixedUpdate()
     {
