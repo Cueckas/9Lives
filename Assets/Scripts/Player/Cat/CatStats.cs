@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class CatStats : MonoBehaviour
@@ -40,6 +41,9 @@ public class CatStats : MonoBehaviour
 
     private int curHP;
 
+    private float invicibleTime = 0.4f;
+    private bool isInvicible = false;
+
 
     void Start()
     {
@@ -53,6 +57,19 @@ public class CatStats : MonoBehaviour
             gg.setFather(GetStatus());
         }
         curHP = hp;
+        
+    }
+    void FixedUpdate()
+    {
+        if (isInvicible)
+        {
+            invicibleTime -= Time.fixedDeltaTime;
+            if (invicibleTime <= 0)
+            {
+                isInvicible = false;
+                invicibleTime = 0.4f;
+            }
+        }
         
     }
 
@@ -88,12 +105,19 @@ public class CatStats : MonoBehaviour
 
     public void TakingDamage(int damage)
     {
-        curHP -= damage;
-        lifeCounter.text = $"{curHP}/{hp}";
-        lifeBar.SetHealth(curHP);
-        if (curHP <= 0)
+        if (!isInvicible)
         {
-            dieChannel.Broadcast();
+            curHP -= damage;
+            lifeCounter.text = $"{curHP}/{hp}";
+            lifeBar.SetHealth(curHP);
+            if (curHP <= 0)
+            {
+                dieChannel.Broadcast();
+            }else
+            {
+                isInvicible = true;
+            }
         }
+        
     }
 }
