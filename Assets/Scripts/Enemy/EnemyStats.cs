@@ -52,6 +52,9 @@ public class EnemyStats : MonoBehaviour
             {
                 // Player is moving downward, so damage the enemy
                 TakeDamage(1); // You can adjust the damage amount as needed
+            }else
+            {
+                collision.gameObject.transform.parent.gameObject.GetComponent<CatStats>().TakingDamage((int)attackPower);
             }
         }
 
@@ -60,7 +63,7 @@ public class EnemyStats : MonoBehaviour
 
     
 
-    void TakeDamage(float amount)
+    public void TakeDamage(float amount)
     {
         currentHp -= amount;
 
