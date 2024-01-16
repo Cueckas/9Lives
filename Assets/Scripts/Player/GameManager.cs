@@ -121,9 +121,30 @@ public class GameManager : MonoBehaviour
         GameObject player = Instantiate(g1, new Vector3 (DiePosition.x,DiePosition.y + 0.5f, DiePosition.z), Quaternion.identity);
         curPlayer = player;
         GameObject child = player.transform.GetChild(2).gameObject;
+
+
         main_camera.GetComponent<FollowObject>().changeTarget(child.transform);
+
+
+
+
         player.GetComponent<CatStats>().Setup(gg,lifeBar,lifeCounter,kittens[id]);
         kittens.RemoveAt(id);
+    }
+
+    public Transform getPlayerTransform(){
+
+        if(curPlayer == null){
+
+            Debug.Log(curPlayer);
+            return null;
+        }
+
+        else{
+            return curPlayer.transform.GetChild(2);
+        }
+
+        
     }
 
     void GameOver()
