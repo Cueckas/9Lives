@@ -78,6 +78,13 @@ namespace TarodevController
         private void HandleSpriteFlip()
         {
             if (_player.FrameInput.x != 0) _sprite.flipX = _player.FrameInput.x > 0;
+            //Debug.Log("uma frase para saber que estamos no animator: " + (_player.FrameInput.x > 0));
+           
+        }
+
+        public bool HandleAnimeFlip()
+        {
+            return _player.FrameInput.x > 0;
         }
 
         private void HandleIdleSpeed()
