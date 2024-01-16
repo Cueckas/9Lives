@@ -149,6 +149,7 @@ public class ScytheSpawn : MonoBehaviour
         Vector3 ScythePosition = new Vector3(playerTransform.position.x , playerTransform.position.y , playerTransform.position.z);
         // Instantiate the prefab at the specified spawn point
         GameObject referenceScythe = Instantiate(Scythe, ScythePosition, playerTransform.rotation);
+        referenceScythe.GetComponent<DoDamage>().damage = gameObject.transform.parent.gameObject.GetComponent<CatStats>().attack;
         referenceScythe.transform.parent = playerTransform;
 
         startTime = Time.time;

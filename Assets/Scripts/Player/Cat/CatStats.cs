@@ -8,19 +8,19 @@ using UnityEngine.UI;
 public class CatStats : MonoBehaviour
 {
 
-    [SerializeField] float timeLife;
+    [SerializeField] public float timeLife;
 
-    [SerializeField] int hp;
+    [SerializeField] public int hp;
 
-    [SerializeField] float speed;
+    [SerializeField] public float speed;
 
-    [SerializeField] float jumpForce;
+    [SerializeField] public float jumpForce;
 
-    [SerializeField] float attack;
+    [SerializeField] public float attack;
 
-    [SerializeField] float attackSpeed;
+    [SerializeField] public float attackSpeed;
 
-    [SerializeField] float attackRate;
+    [SerializeField] public float attackRate;
 
     [SerializeField] NumberEventChannel timerEvent;
 

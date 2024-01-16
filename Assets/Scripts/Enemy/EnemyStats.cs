@@ -63,7 +63,7 @@ public class EnemyStats : MonoBehaviour
 
     
 
-    void TakeDamage(float amount)
+    public void TakeDamage(float amount)
     {
         currentHp -= amount;
 
