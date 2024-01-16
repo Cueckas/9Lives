@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -94,7 +95,6 @@ public class GameManager : MonoBehaviour
     {
         if (lifeNumber >= 0)
         {
-            DiePosition = position;
             GameObject g = (GameObject) Resources.Load("Prefabs/Test_prefab");
             Instantiate(g, position, Quaternion.identity);
             if (lifeNumber == 0)
@@ -170,5 +170,10 @@ public class GameManager : MonoBehaviour
         //result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
         result.AddRange(kittens);
         return result;
+    }
+
+    internal void setSavePoint(Vector3 position)
+    {
+        DiePosition = position;
     }
 }

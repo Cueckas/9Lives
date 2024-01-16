@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GenerateNextGeneration : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class GenerateNextGeneration : MonoBehaviour
     public Text buttonOne;
     public Text buttonTwo;
     public GameManager gm;
+    //this code is not used
     void OnEnable(){
         catOne = father.Copy();
         catTwo = father.Copy();
@@ -47,7 +49,7 @@ public class GenerateNextGeneration : MonoBehaviour
         this.father = father;
     }
 
-    public void SetMother(int mother)
+    public void SetMother(int mother, Vector3 motherPos)
     {
         this.motherType = mother;
         //gm.togglechooseMenu();    //apresenta o menu de escolha
@@ -55,6 +57,7 @@ public class GenerateNextGeneration : MonoBehaviour
         //auto give next gen
         MakeNextGen();
         gm.NewGen(catOne,this);
+        gm.setSavePoint(motherPos);
     }
 
     public void MakeNextGen()

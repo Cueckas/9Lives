@@ -7,7 +7,7 @@ public class FriendCat : MonoBehaviour
 {
 
     public int type;
-
+    public Sprite newSprite;
     public GenerateNextGeneration gg;
 
     private bool touched = false;
@@ -21,9 +21,10 @@ public class FriendCat : MonoBehaviour
             String s = collision.gameObject.tag;
             if ( s == "Player")
             {
-                gg.SetMother(type);
+                gg.SetMother(type, gameObject.transform.position);
                 touched = true;
             }
+            gameObject.GetComponent<SpriteRenderer>().sprite = newSprite;
         }
         catch (NullReferenceException)
         {
