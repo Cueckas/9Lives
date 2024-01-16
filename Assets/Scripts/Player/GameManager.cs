@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    int lifeNumber;
+    
 
     [SerializeField] Text life;
 
@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] VoidEventChannel oldAgeEventChannel;
 
+    [SerializeField] VoidEventChannel coinChannel;
+
     public GameObject main_camera;
 
     public GameObject curPlayer;
@@ -34,16 +36,17 @@ public class GameManager : MonoBehaviour
 
     public GenerateNextGeneration gg;
     public Text lifeCounter;
+    public Text coinCounter;
 
-    private bool isPaused = false; 
-
-    
-
-    private List<Status> kittens; 
-    private Vector3 DiePosition;
+    bool isPaused = false; 
+    int lifeNumber;
+    int coinNumber = 0;
+    List<Status> kittens; 
+    Vector3 DiePosition;
     void OnEnable()
     {
         dieChannel.AddListener(Die);
+        coinChannel.AddListener(CatchCoin);
         positionChannel.AddListener(DiePos);
         kittens = new List<Status>();
         lifeNumber = kittens.Count;
@@ -99,6 +102,12 @@ public class GameManager : MonoBehaviour
                 Respawn(0);
             }
         }
+    }
+
+    void CatchCoin()
+    {
+        coinNumber ++;
+        coinCounter.text = coinNumber.ToString("D2");
     }
 
     public void Respawn(int id)

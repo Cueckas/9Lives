@@ -31,20 +31,14 @@ public class WallMovement : MonoBehaviour
     void Update()
     {
         float playerInput = Input.GetAxis("Vertical");
-        Wallcheck();
-        if (Input.GetKey(KeyCode.LeftShift) && (isLeftWall || isRightWall))
-        {
-            isWallMove = true;
-        }
-        else
-        {
-            isWallMove = false;
-        }
+        
+        isWallMove = Wallcheck();
 
         if (isWallMove)
         {
             rb.gravityScale = 0f;
-
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            //Debug.Log(playerInput);
             if (playerInput > 0)
             {
                 WallClimb();
@@ -61,14 +55,15 @@ public class WallMovement : MonoBehaviour
         else
         {
             ws = WallState.none;
-            rb.gravityScale = 3f;
+            //rb.gravityScale = 3f;
         }
     }
 
-    void Wallcheck()
+    bool Wallcheck()
     {
         isLeftWall = Physics2D.OverlapCircle(transform.position - wallOffset, 0.1f, wallLayer);
         isRightWall = Physics2D.OverlapCircle(transform.position + wallOffset, 0.1f, wallLayer);
+        return isLeftWall || isRightWall;
     }
 
     private void OnDrawGizmos()

@@ -16,7 +16,18 @@ public class FriendCat : MonoBehaviour
         {
             return;
         }
-        gg.SetMother(type);
-        touched = true;
+        try
+        {
+            String s = collision.gameObject.tag;
+            if ( s == "Player")
+            {
+                gg.SetMother(type);
+                touched = true;
+            }
+        }
+        catch (NullReferenceException)
+        {
+            //GameObject.FindGameObjectWithTag("Text").GetComponent<GameManager>().end(1);
+        }    
     }
 }
