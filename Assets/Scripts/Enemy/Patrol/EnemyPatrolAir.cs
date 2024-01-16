@@ -6,6 +6,12 @@ public class EnemyPatrolAir : MonoBehaviour
 {
     Rigidbody2D rb;
     public Transform target;
+
+    public GameObject player;
+
+
+    public float distancethreshold;
+
     public float speed;
     public float visionRange;
     public float chaseDistance;
@@ -13,12 +19,16 @@ public class EnemyPatrolAir : MonoBehaviour
     public float speed_patrol;
     //public LayerMask platformLayer;
 
+    public GameObject gameManager;
+
     public bool isGhost = false;
 
     public float stopDistance;      // How close we get before moving to the next patrol point
     public Vector2[] patrolPoints;  // List of patrol points we will go between
 
     private int currentPoint = 0;
+
+    private bool died = false;
 
 
     void Start()
@@ -34,23 +44,29 @@ public class EnemyPatrolAir : MonoBehaviour
     
     }
 
-        void FindPlayer()
+    void FindPlayer()
     {
         // Find the player object using the specified tag
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        // Check if the player object exists
-        if (player != null)
-        {
-            Debug.Log("Player Found");
-            target = player.transform;
+        if (gameManager == null){
+            gameManager = GameObject.FindGameObjectWithTag("GameController");
         }
+
+        target = gameManager.GetComponent<GameManager>().getPlayerTransform();
+
+
+
     }
 
     void Update()
     {
          if(target == null){
+
+            died = true;
+            
             FindPlayer();
+
+            Debug.Log("is null");
         }
 
         else{   
@@ -73,10 +89,54 @@ public class EnemyPatrolAir : MonoBehaviour
 
     void Chase()
     {   
-        Vector3 direction = target.position - transform.position;
-        rb.AddForce(direction.normalized * speed);
 
-        if (direction.x > 0 && facingLeft)
+       
+
+        Debug.Log("Chasing");
+
+        
+        Vector3 direction = target.position - transform.position;
+        Vector3 direction_normalized = direction.normalized;
+
+
+        float distance = direction.magnitude;
+
+        // Adjust speed based on distance (optional)
+        float adjustedSpeed = speed * Mathf.Clamp01(distance / distancethreshold);
+
+        // Calculate force based on adjusted speed
+        Vector2 force = direction.normalized * adjustedSpeed;
+
+        
+
+        
+
+        Debug.Log(died);
+        if(died){
+            
+            rb.AddForce(force * new Vector2(10f,10f), ForceMode2D.Force);
+            
+            
+        }
+        else{
+            rb.AddForce(force, ForceMode2D.Force );
+        }
+
+
+        
+
+
+        //rb.velocity = new Vector2(target.position.x * 0.01f, target.position.y * 0.01f);
+
+        //Vector2 direction = (target.position - transform.position).normalized;
+        // Adjust speed based on distance (optional, you can remove this if not needed)
+        //float adjustedSpeed = speed * Mathf.Clamp01(Vector2.Distance(transform.position, target.position));
+        // Set the rigidbody's velocity directly
+        //rb.velocity = direction * adjustedSpeed;
+
+        //transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+
+        if (direction.x > 0 && facingLeft)  
         {
             Flip();
         }
@@ -112,4 +172,7 @@ public class EnemyPatrolAir : MonoBehaviour
             Debug.Log("Game Over");
         }
     }
+
+
+
 }
