@@ -43,16 +43,16 @@ public class EnemyStats : MonoBehaviour
         PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
 
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
-
-       
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player"))
         {
+            
             // Check if the player is moving downwards (jumping on top)
             if (playerRigidbody.velocity.y < 0 &&!collision.gameObject.GetComponent<TarodevController.PlayerController>()._grounded && colliderMaterial.name == "EnemyHit") //&& colliderMaterial!=null)
             {
+                
                 // Player is moving downward, so damage the enemy
                 TakeDamage(1); // You can adjust the damage amount as needed
-            }else
+            }else 
             {
                 collision.gameObject.transform.parent.gameObject.GetComponent<CatStats>().TakingDamage((int)attackPower);
             }

@@ -19865,7 +19865,7 @@ MonoBehaviour:
   hp: 100
   speed: 0
   jumpForce: 0
-  attack: 0
+  attack: 10
   attackSpeed: 0
   attackRate: 0
   timerEvent: {fileID: 11400000, guid: fa4d0f8415df12949b701796df21c872, type: 2}

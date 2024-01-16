@@ -7,6 +7,7 @@ TagManager:
   - Enemy_Worm
   - Bomb
   - Block
+  - Enemy
   layers:
   - Default
   - TransparentFX
