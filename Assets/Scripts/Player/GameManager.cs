@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
 
         if(curPlayer == null){
 
-            Debug.Log(curPlayer);
+            //Debug.Log(curPlayer);
             return null;
         }
 

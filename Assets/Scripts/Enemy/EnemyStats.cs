@@ -60,8 +60,7 @@ public class EnemyStats : MonoBehaviour
                 
             }
             else{
-                Debug.Log("Should Deal Damage");
-                collision.gameObject.transform.parent.gameObject.GetComponent<CatStats>().TakingDamage((int)attackPower);
+                collision.gameObject.transform.parent.gameObject.GetComponent<CatStats>()?.TakingDamage((int)attackPower);
             }
 
         }

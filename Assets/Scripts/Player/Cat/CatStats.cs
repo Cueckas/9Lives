@@ -57,7 +57,7 @@ public class CatStats : MonoBehaviour
         }
         curHP = hp;
         isInvicible = true;
-        invicibleTime = 3.0f;
+        invicibleTime = 1.0f;
     }
     void FixedUpdate()
     {
@@ -89,6 +89,7 @@ public class CatStats : MonoBehaviour
     {
         this.timeLife = s.timeLife;
         this.hp = (int)s.hp;
+        curHP = hp;
         this.speed = s.speed;
         this.jumpForce = s.jumpForce;
         this.attack = s.attack;
@@ -97,6 +98,8 @@ public class CatStats : MonoBehaviour
 
     public void Setup(GenerateNextGeneration gg, HealthBar lifeBar, Text lifeCounter, Status s)
     {
+        this.lifeBar = lifeBar;
+        this.lifeCounter = lifeCounter;
         ChangeStatus(s);
         gg.setFather(GetStatus());
         lifeBar.SetMaxHealth(hp);
