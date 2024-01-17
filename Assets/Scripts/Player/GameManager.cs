@@ -60,7 +60,10 @@ public class GameManager : MonoBehaviour
     {
         lifeNumber -= 1;
         life.text = lifeNumber.ToString("D2");
-        toggleDeathMenu();
+        if (lifeNumber >=1)
+        {
+            toggleDeathMenu();
+        }
         
         if (lifeNumber < 0)
         {
@@ -96,6 +99,10 @@ public class GameManager : MonoBehaviour
         {
             GameObject g = (GameObject) Resources.Load("Prefabs/Test_prefab");
             Instantiate(g, position, Quaternion.identity);
+            if (lifeNumber == 0)
+            {
+                Respawn(0);
+            }
         }
     }
 
@@ -107,6 +114,7 @@ public class GameManager : MonoBehaviour
 
     public void Respawn(int id)
     {
+        Debug.Log(1237892137);
         GameObject g1 = (GameObject) Resources.Load("Prefabs/Player");
         
             //position will be a checkpoint
@@ -116,6 +124,9 @@ public class GameManager : MonoBehaviour
 
 
         main_camera.GetComponent<FollowObject>().changeTarget(child.transform);
+
+
+
 
         player.GetComponent<CatStats>().Setup(gg,lifeBar,lifeCounter,kittens[id]);
         kittens.RemoveAt(id);
@@ -149,12 +160,7 @@ public class GameManager : MonoBehaviour
     public List<Status> GetRandomKittens()
     {
         List<Status> result = new List<Status>();
-        if(lifeNumber == 0)
-        {
-            Status s = kittens[0];
-            s.id = 0;
-            result.Add(s);
-        }else if(lifeNumber == 1)
+        if(lifeNumber == 1)
         {
             for (int i = 0; i < 2; i++)
             {
