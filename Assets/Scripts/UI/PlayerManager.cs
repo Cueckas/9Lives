@@ -25,6 +25,14 @@ public class PlayerManager : MonoBehaviour
 
     CapsuleCollider2D [] colliders = null;
 
+
+#region knockback stuff
+    public float knockbackForce = 5f;
+
+    private Rigidbody2D playerRb;
+
+#endregion
+
     void Start()
     {
         // Initialize player attributes from ScriptableStats
@@ -41,6 +49,7 @@ public class PlayerManager : MonoBehaviour
         oldAgeEventChannel.AddListener(BecomeOld);
 
         colliders = GetComponents<CapsuleCollider2D>();
+        playerRb = GetComponent<Rigidbody2D>();
     }
 
     public void BecomeYoung()
@@ -54,6 +63,23 @@ public class PlayerManager : MonoBehaviour
         //GetComponents<CapsuleCollider2D>()[1].enabled = true;
         ModifyColliderSize(GetComponent<CapsuleCollider2D>(),false);
         UpdatePlayerAppearance(true); // Update player's appearance and capabilities
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        
+         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("collision detected");
+             // Calculate knockback direction
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            // Apply knockback force in the opposite direction of the enemy
+            playerRb.velocity = knockbackDirection * knockbackForce;
+            // Do other things, e.g., damage the player, play sound, etc.
+            Debug.Log("Player collided with an enemy!");
+
+
+        }
+
     }
 
     public void BecomeMiddleAged()

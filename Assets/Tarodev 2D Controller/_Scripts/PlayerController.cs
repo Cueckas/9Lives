@@ -31,6 +31,13 @@ namespace TarodevController
 
 
 
+    #region knockback stuff
+    public float knockbackForce = 5f;
+
+    //private Rigidbody2D playerRb;
+
+    #endregion
+
         #endregion
 
         private float _time;
@@ -144,6 +151,23 @@ namespace TarodevController
             Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
         }
 
+        
+    void OnCollisionEnter2D(Collision2D collision){
+
+         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("collision detected");
+             // Calculate knockback direction
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            Debug.Log(knockbackDirection);
+            // Apply knockback force in the opposite direction of the enemy
+            _rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);// Do other things, e.g., damage the player, play sound, etc.
+            Debug.Log("Player collided with an enemy!");
+
+
+        }
+
+    }
         #endregion
 
 

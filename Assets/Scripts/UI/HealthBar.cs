@@ -10,6 +10,8 @@ public class HealthBar : MonoBehaviour
 	public Gradient gradient;
 	public Image fill;
 
+	public bool isTime;
+
 	public void SetMaxHealth(float health)
 	{
 		slider.maxValue = health;
