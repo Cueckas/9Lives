@@ -37,6 +37,12 @@ namespace TarodevController
 
         private bool expiredWallTime = false;
 
+        bool wallJump = false;
+
+        public float xWallForce=15;
+        public float yWallForce=5;
+
+
 
 
     #region knockback stuff
@@ -83,6 +89,10 @@ namespace TarodevController
 
             if (_frameInput.JumpDown)
             {
+                if (isWallMove)
+                {
+                    wallJump = true;
+                }
                 _jumpToConsume = true;
                 _timeJumpWasPressed = _time;
             }
@@ -90,21 +100,20 @@ namespace TarodevController
 
         private void FixedUpdate()
         {
-            CheckCollisions();
+                CheckCollisions();
+                if(!expiredWallTime){
+                    HandleWallClimbing();
+                }
+                
+                HandleJump();
+                HandleDirection();       
+                HandleGravity();
+                
+                HandleMove(); // handles Move Animations
+                ApplyMovement();
 
-
-            if(!expiredWallTime){
-                HandleWallClimbing();
-                Debug.Log("can make a wall climb again");
-            }
-            
-            HandleJump();
-            HandleDirection();       
-            HandleGravity();
-            
-            HandleMove(); // handles Move Animations
-            ApplyMovement();
-            HandleScytheAttack();
+                HandleScytheAttack();
+                wallJump = false;
 
         }
 
@@ -209,7 +218,6 @@ namespace TarodevController
 
         private void HandleJump()
         {
-            
             if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.velocity.y > 0) _endedJumpEarly = true;
 
             if (!_jumpToConsume && !HasBufferedJump) return;
@@ -227,10 +235,35 @@ namespace TarodevController
             _timeJumpWasPressed = 0;
             _bufferedJumpUsable = false;
             _coyoteUsable = false;
-            _frameVelocity.y = _stats.JumpPower;
+            if (wallJump)
+            {
+                _frameVelocity.x = xWallForce;
+                _frameVelocity.y = yWallForce;
+                wallJump = false;
+            }else
+            {
+               _frameVelocity.y = _stats.JumpPower; 
+            }
+            
             Jumped?.Invoke();
 
             expiredWallTime = false;
+        }
+
+        private void WallJump()
+        {       int i = 1;
+                Debug.Log(i);
+                var inAirGravity = _stats.FallAcceleration;
+                yWallForce = Mathf.MoveTowards(yWallForce, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
+                _rb.velocity = new Vector2(xWallForce,yWallForce);
+                //Wallcheck();
+                if (_grounded && !_frameInput.JumpHeld)
+                {
+                    Debug.Log(i);
+                    wallJump = false;
+                    yWallForce =30;
+                }
+                i--;
         }
 
         #endregion
@@ -288,14 +321,19 @@ namespace TarodevController
     bool isLeftWall, isRightWall;
     public Vector3 wallOffset;
     public LayerMask wallLayer;
-    public bool isWallMove;
+    public bool isWallMove = false;
     void Wallcheck()
     {
         isLeftWall = Physics2D.OverlapCircle(transform.position - wallOffset, 0.1f, wallLayer);
         isRightWall = Physics2D.OverlapCircle(transform.position + wallOffset, 0.1f, wallLayer);
-
-        
-        
+        if (isLeftWall)
+        {
+            xWallForce = Mathf.Abs(xWallForce);
+        }else
+        {
+            xWallForce = -1*Mathf.Abs(xWallForce);
+        }
+        Debug.Log(isLeftWall);
         isWallMove = isLeftWall || isRightWall;
 
         if(isWallMove){
@@ -307,9 +345,6 @@ namespace TarodevController
 
     void HandleWallClimbing()
     {
-
-        
-        
 
         Wallcheck();
         if (isWallMove)
