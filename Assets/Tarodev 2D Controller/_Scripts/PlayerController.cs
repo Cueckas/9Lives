@@ -324,8 +324,8 @@ namespace TarodevController
     public bool isWallMove = false;
     void Wallcheck()
     {
-        isLeftWall = Physics2D.OverlapCircle(transform.position - wallOffset, 0.1f, wallLayer);
-        isRightWall = Physics2D.OverlapCircle(transform.position + wallOffset, 0.1f, wallLayer);
+        isLeftWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance, wallLayer);
+        isRightWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance, wallLayer);
         if (isLeftWall)
         {
             xWallForce = Mathf.Abs(xWallForce);
