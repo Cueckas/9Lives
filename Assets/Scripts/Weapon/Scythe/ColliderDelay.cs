@@ -10,14 +10,18 @@ public class ColliderDelay : MonoBehaviour
         Invoke("ActivateCollider",0.25f);
     }
 
-
+    public void Use()
+    {
+        Invoke("ActivateCollider",0.25f);
+        Invoke("HideCollider",0.50f);
+    }
     public void ActivateCollider(){
 
         GetComponent<BoxCollider2D>().enabled = true;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+    public void HideCollider(){
+
+        GetComponent<BoxCollider2D>().enabled = false;
     }
 }

@@ -7,8 +7,39 @@ public class crutch : MonoBehaviour
     public Transform player;
     private bool facingleft = true;
 
+    public KeyCode chargeKey = KeyCode.H;
+
+    private float cooldownTimer = 0f;
+    public float spawnCooldown = 3f;
+    private bool attack = false;
+
     void FixedUpdate()
     {
+        if (Input.GetKey(chargeKey))
+        {   
+
+            //Debug.Log(attack);
+
+            if (!attack)
+            {
+                cooldownTimer = spawnCooldown;
+                // Start or continue charging
+                GetComponent<ColliderDelay>().Use();
+                
+                attack = true;
+            }
+
+        }
+
+        if (attack)
+        {   
+            cooldownTimer -= Time.deltaTime;
+            if (cooldownTimer <= 0f)
+            {
+                attack = false;
+
+            }
+        }
         float playerInput = Input.GetAxis("Horizontal");
         if (playerInput > 0)
         {
