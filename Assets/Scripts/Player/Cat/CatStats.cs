@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TarodevController;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -20,8 +21,6 @@ public class CatStats : MonoBehaviour
 
     [SerializeField] public float attackSpeed;
 
-    [SerializeField] public float attackRate;
-
     [SerializeField] NumberEventChannel timerEvent;
 
     [SerializeField] VoidEventChannel dieChannel;
@@ -33,7 +32,7 @@ public class CatStats : MonoBehaviour
     [SerializeField] VoidEventChannel middleAgeEventChannel;
 
     [SerializeField] VoidEventChannel oldAgeEventChannel;
-
+    public GameObject crutch;
     public GenerateNextGeneration gg;
 
     public HealthBar lifeBar;
@@ -49,7 +48,7 @@ public class CatStats : MonoBehaviour
     {
         timerEvent.Broadcast(timeLife);
         dieChannel.AddListener(Die);
-        
+        oldAgeEventChannel.AddListener(Old);
         if (lifeCounter != null)
         {
             lifeBar.SetMaxHealth(hp);
@@ -62,6 +61,7 @@ public class CatStats : MonoBehaviour
     }
     void FixedUpdate()
     {
+        Debug.Log(gameObject.GetComponent<PlayerController>() == null);
         if (isInvicible)
         {
             invicibleTime -= Time.fixedDeltaTime;
@@ -72,6 +72,10 @@ public class CatStats : MonoBehaviour
             }
         }
         
+    }
+    void Old()
+    {
+        crutch.SetActive(true);
     }
 
     void Die(){
@@ -88,7 +92,6 @@ public class CatStats : MonoBehaviour
         this.jumpForce = s.jumpForce;
         this.attack = s.attack;
         this.attackSpeed = s.attackSpeed;
-        this.attackRate = s.attackRate;
     }
 
     public void Setup(GenerateNextGeneration gg, HealthBar lifeBar, Text lifeCounter, Status s)
@@ -101,7 +104,7 @@ public class CatStats : MonoBehaviour
 
     public Status GetStatus()
     {
-        return new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed,attackRate);
+        return new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed);
     }
 
     public void TakingDamage(int damage)
