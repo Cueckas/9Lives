@@ -13,7 +13,10 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
     public float spawnCooldown = 3f; // Cooldown time in seconds
 
     //spawn timers
-    private float cooldownTimer = 1.8f;
+    private float cooldownTimer = 0f;
+    private float cooldownTimerHide = 1f;
+
+
 
     //stats
     private float amplitude = 3.0f;
@@ -29,76 +32,99 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
 
 
     private float startTime;
-    private bool referenceAlive;
+    private bool referenceAlive = false;
     
-    private GameObject referenceObject;
+    private GameObject HeadObject;
+    private GameObject EnemyWormBody;
+
     private EnemyPatrolGround patrolScript;
-    private EnemyStats enemyStatsScript;
-    private GameObject reference;
+    
+    private EnemyStats childEnemyStatsScript;
+
     void Start()
     {
         patrolScript = GetComponent<EnemyPatrolGround>();
-        enemyStatsScript = GetComponent<EnemyStats>();
-
+        childEnemyStatsScript = GetComponentInChildren<EnemyStats>();
+        HeadObject = gameObject.transform.GetChild(1).gameObject;
+        EnemyWormBody = gameObject.transform.GetChild(0).gameObject;
 
     }
 
     void Update()
     {
+        Debug.Log("player detected ");
+        cooldownTimer -= Time.deltaTime;
+
+        if (!childEnemyStatsScript.alive)
         {
-            Debug.Log("player detected ");
             //find spawnedWorm
-            if (!spawnedWormHead)
+            Die();
+        }
+        else
+        {
+            if (!spawnedWormHead && cooldownTimer <= 0)
             {
                 cooldownTimer = spawnCooldown;
                 // Start or continue charging
-                Debug.Log("eNTERED UPDATE KEY PRSSED");
-                Spawn();
+                Debug.Log("to spawn");
+                Activate();
                 spawnedWormHead = true;
             }
 
-            if (spawnedWormHead )
+            if (spawnedWormHead && cooldownTimer <= 0f)
             {
-                cooldownTimer -= Time.deltaTime;
-                float elapsedTime = Time.time - startTime;
-                Debug.Log("Worm is alive");
-
-                if (enemyStatsScript.alive && referenceAlive)
-                {
-                    reference.transform.position += new Vector3(transform.parent.position.x, transform.parent.position.y, transform.parent.position.z);
-                }
-
-            }
-
-            if (cooldownTimer <= 0f)
-            {
+                DeActivate();
+                cooldownTimer = spawnCooldown;
+                //cooldownTimerHide
                 spawnedWormHead = false;
 
             }
 
         }
-
     }
-    void Spawn()
+   
+    void Activate()
     {
       if (WormHead != null)
          {
 
           Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z);
-          reference = Instantiate(WormHead, spawnPosition, transform.rotation);
+          childEnemyStatsScript = HeadObject.GetComponent<EnemyStats>();
+          
+          //reference = Instantiate(WormHead, spawnPosition, transform.rotation);
 
-          startTime = Time.time;
-          Destroy(reference, 0.5f);
+          //reference.transform.SetParent(transform);
+
+          HeadObject.SetActive(true);
+          EnemyWormBody.SetActive(false);
+
+
+            startTime = Time.time;
+          //Destroy(reference, 0.5f);
+
           }
 
         }
 
-    void Die()
+    void DeActivate()
     {
         // Add any death-related logic here (e.g., play death animation, destroy GameObject, etc.)
         referenceAlive = false;
-        Destroy(reference);
+        Debug.Log("hello" + childEnemyStatsScript.alive);
+
+        HeadObject.SetActive(false);
+        EnemyWormBody.SetActive(true);
+
+
+        startTime = Time.time;
+        if (!childEnemyStatsScript.alive){
+            Destroy(gameObject, 0.5f);
+        }
     }
 
+    void Die()
+    {
+        Destroy(gameObject, 0.5f);
+    }
 
 }

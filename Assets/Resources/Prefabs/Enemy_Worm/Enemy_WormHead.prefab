@@ -41,7 +41,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8219034037044727064}
   - component: {fileID: 7550347863696606684}
-  - component: {fileID: 2211527840771791056}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -114,25 +113,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2211527840771791056
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4448270117951176458}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 19b5c039d8e77f34ea8b1c55968298ee, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6675377257838573983
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,8 +122,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2551008616223615198}
-  - component: {fileID: 1432482273269909106}
   - component: {fileID: -4179432008080895800}
+  - component: {fileID: 5182482112468891793}
   m_Layer: 0
   m_Name: Enemy_WormHead
   m_TagString: Enemy_Worm
@@ -166,27 +146,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1432482273269909106
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6675377257838573983}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &-4179432008080895800
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,7 +155,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 6675377257838573983}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6302d307bb857a94d9dd2fdc7d3f69d3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -213,3 +172,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5182482112468891793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6675377257838573983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4260e995d750026428d448825cf4fe38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fullHp: 0
+  attackPower: 0
+  alive: 0

@@ -29,10 +29,11 @@ public class EnemyStats : MonoBehaviour
     // Called when a 2D collision occurs
     void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("object collided: " + collision.otherCollider.GetType());
+        Debug.Log("Collision gameobject: " + collision.gameObject.name);
+
         // Check if the colliding object has a Rigidbody2D component
         Physics2D.IgnoreLayerCollision(8, 7, true);
-        Physics2D.IgnoreLayerCollision(9, 6, true);
-
 
         Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
         //bool grounded = collision.gameObject.GetComponent<PlayerController>();
@@ -47,18 +48,20 @@ public class EnemyStats : MonoBehaviour
        
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player"))
         {
+            Debug.Log("Collided with player");
             // Check if the player is moving downwards (jumping on top)
-            if (playerRigidbody.velocity.y < 0 &&!collision.gameObject.GetComponent<TarodevController.PlayerController>()._grounded && colliderMaterial.name == "EnemyHit") //&& colliderMaterial!=null)
+            if (collision.otherCollider.GetType().Name == "BoxCollider2D" ) //&& colliderMaterial!=null)
             {
                 // Player is moving downward, so damage the enemy
-                TakeDamage(1); // You can adjust the damage amount as needed
+                TakeDamage(1); // You can adjust the damage amount as
+                Debug.Log("Should Die");
             }
+
         }
 
+        Debug.Log("cOLLISIOn detected");
 
     }
-
-    
 
     void TakeDamage(float amount)
     {
@@ -66,7 +69,7 @@ public class EnemyStats : MonoBehaviour
 
         // Check if the enemy's health is less than or equal to 0
         if (currentHp <= 0)
-        {
+        {   
             Die();
         }
     }
@@ -75,12 +78,7 @@ public class EnemyStats : MonoBehaviour
     {
         // Add any death-related logic here (e.g., play death animation, destroy GameObject, etc.)
         alive = false;
-        Destroy(gameObject);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Die();
+        Destroy(gameObject,0.2f);
     }
 
 
