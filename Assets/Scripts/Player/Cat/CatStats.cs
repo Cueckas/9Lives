@@ -81,6 +81,7 @@ public class CatStats : MonoBehaviour
     void Die(){
         dieChannel.RemoveListener(Die);
         positionChannel.Broadcast(transform.GetChild(2).position);
+        oldAgeEventChannel.RemoveListener(Old);
         Destroy(gameObject);
     }
 

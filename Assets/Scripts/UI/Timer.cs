@@ -16,20 +16,14 @@ public class Timer : MonoBehaviour
 
     public HealthBar timeBar;
 
-    float time = 10;
+    float time;
     float totalTime;
-    bool start = true;
+    bool start = false;
     bool triggeredYoung = false, triggeredMiddle = false, triggeredOld = false;
 
     void OnEnable()
     {
         timerEvent.AddListener(setTime);
-    }
-
-    void Start()
-    {
-        
-        time = totalTime;
     }
 
     void FixedUpdate()
