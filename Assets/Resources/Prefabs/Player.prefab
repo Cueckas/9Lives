@@ -14780,9 +14780,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 05e6a06c5af93134ab98ff12e2c27265, type: 2}
+  xWallForce: 12
+  yWallForce: 12.5
+  groundedDistanceWall_offset: 0
   knockbackForce: 1
   _grounded: 0
-  wallOffset: {x: 0, y: 0, z: 0}
+  wallOffset: {x: -2, y: 0, z: 0}
   wallLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -14821,8 +14824,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04237619, y: 0.41255966}
-  m_Size: {x: 0.5730998, y: 0.85380656}
+  m_Offset: {x: 0.04512024, y: 0.36334687}
+  m_Size: {x: 0.36065674, y: 0.755381}
   m_Direction: 0
 --- !u!114 &1288615784988209804
 MonoBehaviour:

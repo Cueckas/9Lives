@@ -31,7 +31,7 @@ namespace TarodevController
 
         private float timer = 0f;
 
-        private float maxWallTime = 0.5f;
+        private float maxWallTime = 0.2f;
 
         private bool activateWallClimb = false;
 
@@ -41,6 +41,9 @@ namespace TarodevController
 
         public float xWallForce=15;
         public float yWallForce=5;
+
+
+        public float groundedDistanceWall_offset = 0f;
 
 
 
@@ -324,8 +327,8 @@ namespace TarodevController
     public bool isWallMove = false;
     void Wallcheck()
     {
-        isLeftWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance, wallLayer);
-        isRightWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance, wallLayer);
+        isLeftWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance + groundedDistanceWall_offset, wallLayer);
+        isRightWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance + groundedDistanceWall_offset, wallLayer);
         if (isLeftWall)
         {
             xWallForce = Mathf.Abs(xWallForce);
