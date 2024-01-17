@@ -145,8 +145,6 @@ void Patrol()
         // Calculate custom direction vector for x-axis movement only
         Vector2 customDirection = new Vector2(patrolPoints[currentPoint].x - transform.position.x, 0f).normalized;
 
-        Debug.Log(customDirection);
-
         // Set y-component to zero, making the movement only along the x-axis
         direction.y = 0f;
 
@@ -213,8 +211,8 @@ void Patrol()
         Vector2 direction = (target.position - transform.position).normalized;
 
         if(died){
-            Debug.Log("WORM WORM");
-            ourRigidbody.velocity = new Vector2(direction.x * followSpeed, ourRigidbody.velocity.y) * new Vector2(10f,10f);
+
+            ourRigidbody.velocity = new Vector2(direction.x * followSpeed, ourRigidbody.velocity.y) * new Vector2(1f,1f);
         }
         else{
 
@@ -242,7 +240,6 @@ void Patrol()
 
     if (died)
     {
-        Debug.Log("WORM WORM");
         ourRigidbody.velocity = new Vector2(direction.x * fleeSpeed, ourRigidbody.velocity.y) * new Vector2(10f, 10f);
     }
     else

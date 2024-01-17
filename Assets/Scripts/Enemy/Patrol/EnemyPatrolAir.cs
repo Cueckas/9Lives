@@ -66,7 +66,6 @@ public class EnemyPatrolAir : MonoBehaviour
             
             FindPlayer();
 
-            Debug.Log("is null");
         }
 
     }
@@ -79,7 +78,7 @@ public class EnemyPatrolAir : MonoBehaviour
 
             if (distanceToPlayer < chaseDistance)
             {
-                if(target.gameObject.GetComponent<PlayerManager>().isYoung == true){
+                if(target.gameObject.GetComponent<PlayerManager>().isYoung == true || (target.gameObject.GetComponent<PlayerManager>().isYoung == false && isGhost)){
                     Chase();
                 }
                 else if(!isGhost){
@@ -100,9 +99,6 @@ public class EnemyPatrolAir : MonoBehaviour
     void Chase()
     {   
 
-       
-
-        Debug.Log("Chasing");
 
         
         Vector3 direction = target.position - transform.position;
@@ -121,10 +117,10 @@ public class EnemyPatrolAir : MonoBehaviour
 
         
 
-        Debug.Log(died);
+        //Debug.Log(died);
         if(died){
             
-            rb.AddForce(force * new Vector2(10f,10f), ForceMode2D.Force);
+            rb.AddForce(force * new Vector2(1.5f,1.5f), ForceMode2D.Force);
             
             
         }

@@ -232,10 +232,10 @@ MonoBehaviour:
   target: {fileID: 0}
   player: {fileID: 0}
   distancethreshold: 1
-  speed: 3.13
+  speed: 4.36
   visionRange: 7
   chaseDistance: 7.45
-  speed_patrol: 3.05
+  speed_patrol: 3.8
   gameManager: {fileID: 0}
   isGhost: 0
   stopDistance: 1

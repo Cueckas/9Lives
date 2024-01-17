@@ -61,7 +61,7 @@ public class CatStats : MonoBehaviour
     }
     void FixedUpdate()
     {
-        Debug.Log(gameObject.GetComponent<PlayerController>() == null);
+        //Debug.Log(gameObject.GetComponent<PlayerController>() == null);
         if (isInvicible)
         {
             invicibleTime -= Time.fixedDeltaTime;

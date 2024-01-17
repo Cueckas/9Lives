@@ -62,7 +62,6 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
 
         if (gameObject.transform.childCount < 2)
         {
-            Debug.Log("WHAT");
             Die();
         }
         else
@@ -71,7 +70,6 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
             {
                 cooldownTimer = hideCooldown;
                 // Start or continue charging
-                Debug.Log("to spawn");
                 Activate();
                 spawnedWormHead = true;
             }
@@ -116,7 +114,6 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
     {
         // Add any death-related logic here (e.g., play death animation, destroy GameObject, etc.)
         referenceAlive = false;
-        Debug.Log("hello" + childEnemyStatsScript.alive);
 
         HeadObject.SetActive(false);
         EnemyWormBody.SetActive(true);

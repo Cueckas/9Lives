@@ -261,7 +261,7 @@ MonoBehaviour:
   target: {fileID: 0}
   player: {fileID: 0}
   distancethreshold: 1
-  speed: 1.21
+  speed: 1.67
   visionRange: 5
   chaseDistance: 9.51
   speed_patrol: 2

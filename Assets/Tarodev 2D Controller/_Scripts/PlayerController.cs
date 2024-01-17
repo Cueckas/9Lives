@@ -95,6 +95,7 @@ namespace TarodevController
 
             if(!expiredWallTime){
                 HandleWallClimbing();
+                Debug.Log("can make a wall climb again");
             }
             
             HandleJump();
@@ -176,7 +177,7 @@ namespace TarodevController
 
             Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
 
-            Debug.Log(knockbackDirection);
+            //Debug.Log(knockbackDirection);
             // Apply knockback force in the opposite direction of the enemy
             _rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);// Do other things, e.g., damage the player, play sound, etc.
 
@@ -184,9 +185,9 @@ namespace TarodevController
            // _frameVelocity += knockbackForceVector;
 
             // Log the frame velocity with knockback applied
-            Debug.Log("Frame Velocity with Knockback: " + _frameVelocity);
+            //Debug.Log("Frame Velocity with Knockback: " + _frameVelocity);
 
-            Debug.Log("Player collided with an enemy!");
+            //Debug.Log("Player collided with an enemy!");
 
 
         }
@@ -293,8 +294,15 @@ namespace TarodevController
         isLeftWall = Physics2D.OverlapCircle(transform.position - wallOffset, 0.1f, wallLayer);
         isRightWall = Physics2D.OverlapCircle(transform.position + wallOffset, 0.1f, wallLayer);
 
-        Debug.Log(isLeftWall);
+        
+        
         isWallMove = isLeftWall || isRightWall;
+
+        if(isWallMove){
+
+            Debug.Log("isLeftWall: " + isLeftWall);
+            Debug.Log("isRightWall: " + isLeftWall);
+        }
     }
 
     void HandleWallClimbing()

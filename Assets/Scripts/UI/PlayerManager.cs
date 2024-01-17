@@ -73,13 +73,13 @@ public class PlayerManager : MonoBehaviour
         
          if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("collision detected");
+            //Debug.Log("collision detected");
              // Calculate knockback direction
             Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
             // Apply knockback force in the opposite direction of the enemy
             playerRb.velocity = knockbackDirection * knockbackForce;
             // Do other things, e.g., damage the player, play sound, etc.
-            Debug.Log("Player collided with an enemy!");
+           // Debug.Log("Player collided with an enemy!");
 
 
         }
