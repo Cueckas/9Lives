@@ -195,11 +195,16 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: -0.014577568, y: 0.4728284}
-      - {x: -0.49977887, y: 0.4923978}
-      - {x: -0.4829635, y: -0.5032872}
+    - - {x: 0.50453186, y: 0.50059986}
+      - {x: 0.4999488, y: 0.16745806}
+      - {x: -0.5027466, y: 0.17391491}
+      - {x: -0.50413513, y: 0.49897003}
+      - {x: -0.51716614, y: 0.49825764}
+      - {x: -0.514351, y: 0.49714804}
+      - {x: -0.51293945, y: 0.16910362}
+      - {x: -0.5037002, y: -0.5000981}
       - {x: 0.50043404, y: -0.49455202}
-      - {x: 0.4968294, y: 0.48366302}
+      - {x: 0.5120729, y: 0.50126404}
 --- !u!61 &3549637213709997164
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -213,7 +218,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0058423877, y: 0.38871366}
+  m_Offset: {x: 0.0002822876, y: 0.3637638}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -224,7 +229,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.85978305, y: 0.22257268}
+  m_Size: {x: 0.9973297, y: 0.27247238}
   m_EdgeRadius: 0
 --- !u!114 &4977646067002097739
 MonoBehaviour:

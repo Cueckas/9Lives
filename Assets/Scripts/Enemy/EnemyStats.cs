@@ -10,7 +10,9 @@ public class EnemyStats : MonoBehaviour
     //public gameObject Player;
 
     private float currentHp;
-    public bool alive;
+    public bool alive = true;
+
+    //public bool isWormole_Claw= false;
 
 
     // Start is called before the first frame update
@@ -23,6 +25,8 @@ public class EnemyStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         // Add your enemy behavior code here
     }
 
@@ -41,7 +45,7 @@ public class EnemyStats : MonoBehaviour
         //Collider2D collider2D = collision.collider;
 
         BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
+        //PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
 
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player"))
@@ -53,7 +57,11 @@ public class EnemyStats : MonoBehaviour
                 
                 // Player is moving downward, so damage the enemy
                 TakeDamage(1); // You can adjust the damage amount as
-                Debug.Log("Should Die");
+                
+            }
+            else{
+                Debug.Log("Should Deal Damage");
+                collision.gameObject.transform.parent.gameObject.GetComponent<CatStats>().TakingDamage((int)attackPower);
             }
 
         }

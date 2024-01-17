@@ -10,11 +10,12 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
     //bool
     private bool spawnedWormHead = false;
 
-    public float spawnCooldown = 3f; // Cooldown time in seconds
+    public float spawnCooldown = 3.5f; // Cooldown time in seconds
+    public float hideCooldown = 2f;
 
     //spawn timers
     private float cooldownTimer = 0f;
-    private float cooldownTimerHide = 1f;
+
 
 
 
@@ -48,23 +49,27 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
         HeadObject = gameObject.transform.GetChild(1).gameObject;
         EnemyWormBody = gameObject.transform.GetChild(0).gameObject;
 
+        Physics2D.IgnoreLayerCollision(9, 6, true);
+
+        Debug.Log(HeadObject.name);
+
     }
 
     void Update()
     {
-        Debug.Log("player detected ");
+        
         cooldownTimer -= Time.deltaTime;
 
-        if (!childEnemyStatsScript.alive)
+        if (gameObject.transform.childCount < 2)
         {
-            //find spawnedWorm
+            Debug.Log("WHAT");
             Die();
         }
         else
         {
             if (!spawnedWormHead && cooldownTimer <= 0)
             {
-                cooldownTimer = spawnCooldown;
+                cooldownTimer = hideCooldown;
                 // Start or continue charging
                 Debug.Log("to spawn");
                 Activate();
@@ -75,7 +80,6 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
             {
                 DeActivate();
                 cooldownTimer = spawnCooldown;
-                //cooldownTimerHide
                 spawnedWormHead = false;
 
             }
@@ -88,8 +92,8 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
       if (WormHead != null)
          {
 
-          Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z);
-          childEnemyStatsScript = HeadObject.GetComponent<EnemyStats>();
+          //Vector3 spawnPosition = new Vector3(transform.position.x, transform.position.y +1f, transform.position.z);
+          //childEnemyStatsScript = HeadObject.GetComponent<EnemyStats>();
           
           //reference = Instantiate(WormHead, spawnPosition, transform.rotation);
 
@@ -98,13 +102,15 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
           HeadObject.SetActive(true);
           EnemyWormBody.SetActive(false);
 
+          GetComponent<EnemyPatrolGround>().stop = true;
+
 
             startTime = Time.time;
           //Destroy(reference, 0.5f);
 
           }
 
-        }
+    }
 
     void DeActivate()
     {
@@ -114,6 +120,8 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
 
         HeadObject.SetActive(false);
         EnemyWormBody.SetActive(true);
+
+        GetComponent<EnemyPatrolGround>().stop = false;
 
 
         startTime = Time.time;

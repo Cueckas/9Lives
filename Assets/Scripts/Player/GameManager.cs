@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
     public List<Status> GetKittenList()
     {
         List<Status> result = new List<Status>();
-        //result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
+        result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
         result.AddRange(kittens);
         return result;
     }

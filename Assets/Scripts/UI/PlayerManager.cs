@@ -23,6 +23,8 @@ public class PlayerManager : MonoBehaviour
     public VoidEventChannel middleAgeEventChannel;
     public VoidEventChannel oldAgeEventChannel;
 
+    public bool? isYoung = false;
+
     CapsuleCollider2D [] colliders = null;
 
 
@@ -59,6 +61,8 @@ public class PlayerManager : MonoBehaviour
         speed = baseSpeed * 1.2f;
         jumpHeight = baseJumpHeight * 1.2f;
 
+        isYoung = true;
+
         //GetComponents<CapsuleCollider2D>()[0].
         //GetComponents<CapsuleCollider2D>()[1].enabled = true;
         ModifyColliderSize(GetComponent<CapsuleCollider2D>(),false);
@@ -92,6 +96,9 @@ public class PlayerManager : MonoBehaviour
         //GetComponents<CapsuleCollider2D>()[1].enabled = false;
         ModifyColliderSize(GetComponent<CapsuleCollider2D>(),true);
         UpdatePlayerAppearance(false); // Update player's appearance and capabilities
+
+        isYoung = null;
+
     }
 
     public void BecomeOld()
@@ -102,6 +109,8 @@ public class PlayerManager : MonoBehaviour
         jumpHeight = baseJumpHeight * 0.8f;
         attackDamage = baseAttackDamage * 1.2f;
         UpdatePlayerAppearance(null); // Update player's appearance and capabilities
+
+        isYoung = false;
     }
 
     public void UpdatePlayerAppearance(bool? young)
