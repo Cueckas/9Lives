@@ -44,14 +44,13 @@ public class EnemyStats : MonoBehaviour
         PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
 
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
-
-       
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Collided with player");
             // Check if the player is moving downwards (jumping on top)
             if (collision.otherCollider.GetType().Name == "BoxCollider2D" ) //&& colliderMaterial!=null)
             {
+                
                 // Player is moving downward, so damage the enemy
                 TakeDamage(1); // You can adjust the damage amount as
                 Debug.Log("Should Die");
@@ -63,7 +62,8 @@ public class EnemyStats : MonoBehaviour
 
     }
 
-    void TakeDamage(float amount)
+    
+    public void TakeDamage(float amount)
     {
         currentHp -= amount;
 

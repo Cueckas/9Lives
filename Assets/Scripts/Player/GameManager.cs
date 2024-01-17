@@ -5,6 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
     public Text lifeCounter;
     public Text coinCounter;
 
+    public static event System.Action OnPlayerRespawn;
+
     bool isPaused = false; 
     int lifeNumber;
     int coinNumber = 0;
@@ -57,10 +60,7 @@ public class GameManager : MonoBehaviour
     {
         lifeNumber -= 1;
         life.text = lifeNumber.ToString("D2");
-        if (lifeNumber >=1)
-        {
-            toggleDeathMenu();
-        }
+        toggleDeathMenu();
         
         if (lifeNumber < 0)
         {
@@ -94,13 +94,8 @@ public class GameManager : MonoBehaviour
     {
         if (lifeNumber >= 0)
         {
-            DiePosition = position;
             GameObject g = (GameObject) Resources.Load("Prefabs/Test_prefab");
             Instantiate(g, position, Quaternion.identity);
-            if (lifeNumber == 0)
-            {
-                Respawn(0);
-            }
         }
     }
 
@@ -112,16 +107,33 @@ public class GameManager : MonoBehaviour
 
     public void Respawn(int id)
     {
-        Debug.Log(1237892137);
         GameObject g1 = (GameObject) Resources.Load("Prefabs/Player");
         
             //position will be a checkpoint
         GameObject player = Instantiate(g1, new Vector3 (DiePosition.x,DiePosition.y + 0.5f, DiePosition.z), Quaternion.identity);
         curPlayer = player;
         GameObject child = player.transform.GetChild(2).gameObject;
+
+
         main_camera.GetComponent<FollowObject>().changeTarget(child.transform);
+
         player.GetComponent<CatStats>().Setup(gg,lifeBar,lifeCounter,kittens[id]);
         kittens.RemoveAt(id);
+    }
+
+    public Transform getPlayerTransform(){
+
+        if(curPlayer == null){
+
+            Debug.Log(curPlayer);
+            return null;
+        }
+
+        else{
+            return curPlayer.transform.GetChild(2);
+        }
+
+        
     }
 
     void GameOver()
@@ -137,7 +149,12 @@ public class GameManager : MonoBehaviour
     public List<Status> GetRandomKittens()
     {
         List<Status> result = new List<Status>();
-        if(lifeNumber == 1)
+        if(lifeNumber == 0)
+        {
+            Status s = kittens[0];
+            s.id = 0;
+            result.Add(s);
+        }else if(lifeNumber == 1)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -170,5 +187,15 @@ public class GameManager : MonoBehaviour
         //result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
         result.AddRange(kittens);
         return result;
+    }
+
+    internal void setSavePoint(Vector3 position)
+    {
+        DiePosition = position;
+    }
+
+     public static void PlayerRespawned()
+    {
+        OnPlayerRespawn?.Invoke();
     }
 }
