@@ -33,9 +33,9 @@ namespace TarodevController
 
         private float maxWallTime = 0.2f;
 
-        private bool activateWallClimb = false;
+        public bool activateWallClimb = false;
 
-        private bool expiredWallTime = false;
+        public bool expiredWallTime = false;
 
         bool wallJump = false;
 
@@ -104,9 +104,7 @@ namespace TarodevController
         private void FixedUpdate()
         {
                 CheckCollisions();
-                if(!expiredWallTime){
                     HandleWallClimbing();
-                }
                 
                 HandleJump();
                 HandleDirection();       
@@ -240,6 +238,7 @@ namespace TarodevController
             _coyoteUsable = false;
             if (wallJump)
             {
+                Debug.Log("jumped in walll");
                 _frameVelocity.x = xWallForce;
                 _frameVelocity.y = yWallForce;
                 wallJump = false;
@@ -249,24 +248,21 @@ namespace TarodevController
             }
             
             Jumped?.Invoke();
-
+            Debug.Log("jumped");
             expiredWallTime = false;
         }
 
         private void WallJump()
-        {       int i = 1;
-                Debug.Log(i);
+        {      
                 var inAirGravity = _stats.FallAcceleration;
                 yWallForce = Mathf.MoveTowards(yWallForce, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
                 _rb.velocity = new Vector2(xWallForce,yWallForce);
                 //Wallcheck();
                 if (_grounded && !_frameInput.JumpHeld)
                 {
-                    Debug.Log(i);
                     wallJump = false;
                     yWallForce =30;
                 }
-                i--;
         }
 
         #endregion
@@ -336,14 +332,7 @@ namespace TarodevController
         {
             xWallForce = -1*Mathf.Abs(xWallForce);
         }
-        Debug.Log(isLeftWall);
         isWallMove = isLeftWall || isRightWall;
-
-        if(isWallMove){
-
-            Debug.Log("isLeftWall: " + isLeftWall);
-            Debug.Log("isRightWall: " + isLeftWall);
-        }
     }
 
     void HandleWallClimbing()
@@ -372,16 +361,7 @@ namespace TarodevController
 
                 _grounded = isWallMove;
                 float playerInput = Input.GetAxis("Vertical");
-                if (playerInput > 0)
-                {
-                    WallClimb();
-                }
-                else if (playerInput < 0)
-                {
-                    WallSlide();
-                }
-                else
-                {
+                if(!expiredWallTime){
                     WallGrab();
                 }
             }
