@@ -23,7 +23,17 @@ public class PlayerManager : MonoBehaviour
     public VoidEventChannel middleAgeEventChannel;
     public VoidEventChannel oldAgeEventChannel;
 
+    public bool? isYoung = false;
+
     CapsuleCollider2D [] colliders = null;
+
+
+#region knockback stuff
+    public float knockbackForce = 5f;
+
+    private Rigidbody2D playerRb;
+
+#endregion
 
     void Start()
     {
@@ -41,6 +51,7 @@ public class PlayerManager : MonoBehaviour
         oldAgeEventChannel.AddListener(BecomeOld);
 
         colliders = GetComponents<CapsuleCollider2D>();
+        playerRb = GetComponent<Rigidbody2D>();
     }
 
     public void BecomeYoung()
@@ -50,10 +61,29 @@ public class PlayerManager : MonoBehaviour
         speed = baseSpeed * 1.2f;
         jumpHeight = baseJumpHeight * 1.2f;
 
+        isYoung = true;
+
         //GetComponents<CapsuleCollider2D>()[0].
         //GetComponents<CapsuleCollider2D>()[1].enabled = true;
         ModifyColliderSize(GetComponent<CapsuleCollider2D>(),false);
         UpdatePlayerAppearance(true); // Update player's appearance and capabilities
+    }
+
+    void OnCollisionEnter2D(Collision2D collision){
+        
+         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            //Debug.Log("collision detected");
+             // Calculate knockback direction
+            Vector2 knockbackDirection = (transform.position - collision.transform.position).normalized;
+            // Apply knockback force in the opposite direction of the enemy
+            playerRb.velocity = knockbackDirection * knockbackForce;
+            // Do other things, e.g., damage the player, play sound, etc.
+           // Debug.Log("Player collided with an enemy!");
+
+
+        }
+
     }
 
     public void BecomeMiddleAged()
@@ -66,6 +96,9 @@ public class PlayerManager : MonoBehaviour
         //GetComponents<CapsuleCollider2D>()[1].enabled = false;
         ModifyColliderSize(GetComponent<CapsuleCollider2D>(),true);
         UpdatePlayerAppearance(false); // Update player's appearance and capabilities
+
+        isYoung = null;
+
     }
 
     public void BecomeOld()
@@ -76,6 +109,8 @@ public class PlayerManager : MonoBehaviour
         jumpHeight = baseJumpHeight * 0.8f;
         attackDamage = baseAttackDamage * 1.2f;
         UpdatePlayerAppearance(null); // Update player's appearance and capabilities
+
+        isYoung = false;
     }
 
     public void UpdatePlayerAppearance(bool? young)

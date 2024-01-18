@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7479827884549143661}
   - component: {fileID: 226599754}
   - component: {fileID: 226599753}
+  - component: {fileID: 7251551706634914703}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -53,7 +54,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164744044289902690}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -85,6 +86,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
+--- !u!114 &7251551706634914703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164744044289902690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f871885b1483a4381a72a60fc492f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1256799048614936069
 GameObject:
   m_ObjectHideFlags: 0

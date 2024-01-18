@@ -18,22 +18,19 @@ public class Status
 
     public float attackSpeed;
 
-    public float attackRate;
-
     public int id;
 
     private List<int> parents;
 
-    private bool buff0, buff1, buff2, buff3, buff4, buff5,buff6;
+    private bool buff0, buff1, buff2, buff3, buff4, buff5;
 
-    public Status(float timeLife, float hp, float speed, float jumpForce, float attack, float attackSpeed, float attackRate){
+    public Status(float timeLife, float hp, float speed, float jumpForce, float attack, float attackSpeed){
         this.timeLife = timeLife;
         this.hp = hp;
         this.speed = speed;
         this.jumpForce = jumpForce;
         this.attack = attack;
         this.attackSpeed = attackSpeed;
-        this.attackRate = attackRate;
         parents = new List<int>();
     }
 
@@ -41,7 +38,7 @@ public class Status
 
     public Status Copy()
     {
-        Status s = new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed,attackRate);
+        Status s = new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed);
         s.AddRange(parents);
         return s;
     }
@@ -59,7 +56,6 @@ public class Status
         this.jumpForce *= UnityEngine.Random.Range(min,max);
         this.attack *= UnityEngine.Random.Range(min,max);
         this.attackSpeed *= UnityEngine.Random.Range(min,max);
-        this.attackRate *= UnityEngine.Random.Range(min,max);
     }
 
     void Mutate()
@@ -100,16 +96,6 @@ public class Status
                 }
             }
         }
-        if (buff6 && buff5)
-        {
-            if (UnityEngine.Random.Range(0,2) == 0)
-            {
-                this.attackSpeed *= UnityEngine.Random.Range(0.9f,0.95f);
-            }else
-            {
-                this.attackRate *= UnityEngine.Random.Range(0.9f,0.95f);
-            }
-        }
     }
 
     private void Check(int item)
@@ -132,9 +118,6 @@ public class Status
         }else if (item == 5)
         {
             buff5 = true;
-        }else if (item == 6)
-        {
-            buff6 = true;
         }
     }
 
@@ -160,10 +143,7 @@ public class Status
         }else if (status == 5)
         {
             this.attackSpeed *= UnityEngine.Random.Range(min,max);
-        }else if (status == 6)
-        {
-            this.attackRate *= UnityEngine.Random.Range(min,max);
-        } 
+        }
         Mutate();       
     }
 
@@ -174,7 +154,6 @@ public class Status
                $"Speed: {speed:F0}\n" +
                $"Jump Force: {jumpForce:F0}\n" +
                $"Attack: {attack:F0}\n" +
-               $"Attack Speed: {attackSpeed:F0}\n" +
-               $"Attack Rate: {attackRate:F0}";
+               $"Attack Speed: {attackSpeed:F0}\n";
     }
 }

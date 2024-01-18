@@ -10,7 +10,9 @@ public class EnemyStats : MonoBehaviour
     //public gameObject Player;
 
     private float currentHp;
-    public bool alive;
+    public bool alive = true;
+
+    //public bool isWormole_Claw= false;
 
 
     // Start is called before the first frame update
@@ -23,14 +25,14 @@ public class EnemyStats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         // Add your enemy behavior code here
     }
 
     // Called when a 2D collision occurs
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("object collided: " + collision.otherCollider.GetType());
-        Debug.Log("Collision gameobject: " + collision.gameObject.name);
 
         // Check if the colliding object has a Rigidbody2D component
         Physics2D.IgnoreLayerCollision(8, 7, true);
@@ -41,10 +43,10 @@ public class EnemyStats : MonoBehaviour
         //Collider2D collider2D = collision.collider;
 
         BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
-        PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
+        //PhysicsMaterial2D colliderMaterial = boxCollider.sharedMaterial;
 
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
-        if (playerRigidbody != null && collision.gameObject.CompareTag("Player"))
+        if (playerRigidbody != null && collision.gameObject.CompareTag("Player") && alive)
         {
             Debug.Log("Collided with player");
             // Check if the player is moving downwards (jumping on top)
@@ -52,13 +54,15 @@ public class EnemyStats : MonoBehaviour
             {
                 
                 // Player is moving downward, so damage the enemy
-                TakeDamage(1); // You can adjust the damage amount as
-                Debug.Log("Should Die");
+                TakeDamage(10); // You can adjust the damage amount as
+
+                
+            }
+            else{
+                collision.gameObject.transform.parent.gameObject.GetComponent<CatStats>()?.TakingDamage((int)attackPower);
             }
 
         }
-
-        Debug.Log("cOLLISIOn detected");
 
     }
 

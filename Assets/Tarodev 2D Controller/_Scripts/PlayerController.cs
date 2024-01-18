@@ -29,7 +29,31 @@ namespace TarodevController
         public event Action Walking;
         public event Action Scythe;
 
+        private float timer = 0f;
 
+        private float maxWallTime = 0.2f;
+
+        public bool activateWallClimb = false;
+
+        public bool expiredWallTime = false;
+
+        bool wallJump = false;
+
+        public float xWallForce=15;
+        public float yWallForce=5;
+
+
+        public float groundedDistanceWall_offset = 0f;
+
+
+
+
+    #region knockback stuff
+    public float knockbackForce = 5f;
+
+    //private Rigidbody2D playerRb;
+
+    #endregion
 
         #endregion
 
@@ -68,6 +92,10 @@ namespace TarodevController
 
             if (_frameInput.JumpDown)
             {
+                if (isWallMove)
+                {
+                    wallJump = true;
+                }
                 _jumpToConsume = true;
                 _timeJumpWasPressed = _time;
             }
@@ -75,15 +103,19 @@ namespace TarodevController
 
         private void FixedUpdate()
         {
-            CheckCollisions();
-            HandleWallClimbing();
-            HandleJump();
-            HandleDirection();       
-            HandleGravity();
-            
-            HandleMove(); // handles Move Animations
-            ApplyMovement();
-            HandleScytheAttack();
+                CheckCollisions();
+                    HandleWallClimbing();
+                
+                HandleJump();
+                HandleDirection();       
+                HandleGravity();
+                
+                HandleMove(); // handles Move Animations
+                ApplyMovement();
+
+                HandleScytheAttack();
+                wallJump = false;
+
         }
 
 
@@ -144,6 +176,33 @@ namespace TarodevController
             Physics2D.queriesStartInColliders = _cachedQueryStartInColliders;
         }
 
+        
+    void OnCollisionEnter2D(Collision2D collision){
+
+         if (collision.gameObject.CompareTag("Enemy"))
+        {
+            
+            Vector2 rbVelocity = new Vector2(_rb.velocity.x, _rb.velocity.y);
+            Vector2 knockbackDirection = rbVelocity.normalized + ((Vector2)transform.position - (Vector2)collision.transform.position).normalized;
+
+            Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
+
+            //Debug.Log(knockbackDirection);
+            // Apply knockback force in the opposite direction of the enemy
+            _rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);// Do other things, e.g., damage the player, play sound, etc.
+
+                    // Add the knockback force to the frame velocity directly
+           // _frameVelocity += knockbackForceVector;
+
+            // Log the frame velocity with knockback applied
+            //Debug.Log("Frame Velocity with Knockback: " + _frameVelocity);
+
+            //Debug.Log("Player collided with an enemy!");
+
+
+        }
+
+    }
         #endregion
 
 
@@ -160,7 +219,6 @@ namespace TarodevController
 
         private void HandleJump()
         {
-            
             if (!_endedJumpEarly && !_grounded && !_frameInput.JumpHeld && _rb.velocity.y > 0) _endedJumpEarly = true;
 
             if (!_jumpToConsume && !HasBufferedJump) return;
@@ -172,12 +230,39 @@ namespace TarodevController
 
         private void ExecuteJump()
         {
+
+            
             _endedJumpEarly = false;
             _timeJumpWasPressed = 0;
             _bufferedJumpUsable = false;
             _coyoteUsable = false;
-            _frameVelocity.y = _stats.JumpPower;
+            if (wallJump)
+            {
+                Debug.Log("jumped in walll");
+                _frameVelocity.x = xWallForce;
+                _frameVelocity.y = yWallForce;
+                wallJump = false;
+            }else
+            {
+               _frameVelocity.y = _stats.JumpPower; 
+            }
+            
             Jumped?.Invoke();
+            Debug.Log("jumped");
+            expiredWallTime = false;
+        }
+
+        private void WallJump()
+        {      
+                var inAirGravity = _stats.FallAcceleration;
+                yWallForce = Mathf.MoveTowards(yWallForce, -_stats.MaxFallSpeed, inAirGravity * Time.fixedDeltaTime);
+                _rb.velocity = new Vector2(xWallForce,yWallForce);
+                //Wallcheck();
+                if (_grounded && !_frameInput.JumpHeld)
+                {
+                    wallJump = false;
+                    yWallForce =30;
+                }
         }
 
         #endregion
@@ -203,11 +288,11 @@ namespace TarodevController
 
         private void HandleGravity()
         {
-            if (isWallMove)
+            if (isWallMove && activateWallClimb)
             {
                 return;
             }
-            if (_grounded && _frameVelocity.y <= 0f)
+            if (_grounded && _frameVelocity.y <= 0f )
             {
                 _frameVelocity.y = _stats.GroundingForce;
             }
@@ -235,33 +320,52 @@ namespace TarodevController
     bool isLeftWall, isRightWall;
     public Vector3 wallOffset;
     public LayerMask wallLayer;
-    public bool isWallMove;
+    public bool isWallMove = false;
     void Wallcheck()
     {
-        isLeftWall = Physics2D.OverlapCircle(transform.position - wallOffset, 0.1f, wallLayer);
-        isRightWall = Physics2D.OverlapCircle(transform.position + wallOffset, 0.1f, wallLayer);
+        isLeftWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance + groundedDistanceWall_offset, wallLayer);
+        isRightWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance + groundedDistanceWall_offset, wallLayer);
+        if (isLeftWall)
+        {
+            xWallForce = Mathf.Abs(xWallForce);
+        }else
+        {
+            xWallForce = -1*Mathf.Abs(xWallForce);
+        }
         isWallMove = isLeftWall || isRightWall;
     }
 
     void HandleWallClimbing()
     {
+
         Wallcheck();
         if (isWallMove)
         {
-            _grounded = isWallMove;
-            float playerInput = Input.GetAxis("Vertical");
-            if (playerInput > 0)
-            {
-                WallClimb();
+
+            if(!activateWallClimb){
+
+                activateWallClimb = true;
+                timer = maxWallTime;
             }
-            else if (playerInput < 0)
-            {
-                WallSlide();
+            else{
+
+                timer -= Time.deltaTime;
+                if(timer <= 0){
+                    activateWallClimb= false;
+                    isWallMove = false;
+                    expiredWallTime = true;
+                }
             }
-            else
-            {
-                WallGrab();
+
+            if(activateWallClimb){
+
+                _grounded = isWallMove;
+                float playerInput = Input.GetAxis("Vertical");
+                if(!expiredWallTime){
+                    WallGrab();
+                }
             }
+
         }
     }
 
