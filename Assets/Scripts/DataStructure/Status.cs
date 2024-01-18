@@ -19,6 +19,9 @@ public class Status
     private List<int> parents;
 
     private bool[] buffs;
+    
+    public int buffRange = 0;
+    public String t = "No Buff";
 
     public Status(float timeLife, float hp, float speed, float attack){
         this.timeLife = timeLife;
@@ -35,6 +38,8 @@ public class Status
     {
         Status s = new Status(timeLife,hp, speed, attack);
         s.AddRange(parents);
+        s.buffRange = buffRange;
+        s.t = t;
         return s;
     }
 
@@ -82,34 +87,54 @@ public class Status
         }
     }
 
-    private void Check(int item)
+    private void Check(int item, float c)
     {
         buffs[item] =true;
+        t = item==0?"TimeLife":item==1?"HP":item==2?"Speed":"Attack";
+        if (c < 1.15f)
+        {
+            buffRange = 1;
+        }else if(c < 1.20f)
+        {
+            buffRange = 2;
+        }else if(c < 1.25f)
+        {
+            buffRange = 3;
+        }else if(c < 1.30f)
+        {
+            buffRange = 4;
+        }else
+        {
+            buffRange = 5;
+        }
     }
 
     public void RandomSingleStatus(float min, float max, int status)
     {
         parents.Add(status);
-        Check(status);
+        
+        float c = UnityEngine.Random.Range(min,max);
+        Check(status,c);
         if (status == 0)
         {
-            this.timeLife *= UnityEngine.Random.Range(min,max);
+            this.timeLife *= c;
         }else if (status == 1)
         {
-            this.hp *= UnityEngine.Random.Range(min,max);
+            this.hp *= c;
         }else if (status == 2)
         {
-            this.speed *= UnityEngine.Random.Range(min,max);
+            this.speed *= c;
         }else if (status == 4)
         {
-            this.attack *= UnityEngine.Random.Range(min,max);
+            this.attack *= c;
         }
+
         Mutate();       
     }
 
     public override String ToString()
     {
-        return $"Time Life: {timeLife:F0}\n" +
+        return $"Time Life: {timeLife:F0}s\n" +
                $"HP: {hp:F0}\n" +
                $"Speed: {speed:F0}\n" +
                $"Attack: {attack:F0}\n";
