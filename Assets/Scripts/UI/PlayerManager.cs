@@ -1,6 +1,7 @@
 using UnityEngine;
 using TarodevController;
-using System; // Import the TarodevController namespace
+using System;
+using TMPro; // Import the TarodevController namespace
 
 public class PlayerManager : MonoBehaviour
 {
@@ -24,6 +25,12 @@ public class PlayerManager : MonoBehaviour
     public VoidEventChannel oldAgeEventChannel;
 
     public bool? isYoung = false;
+
+    public bool normalSize = false;
+
+    public bool isInSmallHole = false;
+
+    public TextMeshPro agetext;
 
     CapsuleCollider2D [] colliders = null;
 
@@ -67,6 +74,7 @@ public class PlayerManager : MonoBehaviour
         //GetComponents<CapsuleCollider2D>()[1].enabled = true;
         ModifyColliderSize(GetComponent<CapsuleCollider2D>(),false);
         UpdatePlayerAppearance(true); // Update player's appearance and capabilities
+        
     }
 
     void OnCollisionEnter2D(Collision2D collision){
@@ -98,6 +106,7 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayerAppearance(false); // Update player's appearance and capabilities
 
         isYoung = null;
+        
 
     }
 
@@ -111,6 +120,7 @@ public class PlayerManager : MonoBehaviour
         UpdatePlayerAppearance(null); // Update player's appearance and capabilities
 
         isYoung = false;
+       
     }
 
     public void UpdatePlayerAppearance(bool? young)
@@ -120,7 +130,7 @@ public class PlayerManager : MonoBehaviour
         if(young == true){
             transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, transform.GetChild(0).position.y + 0.2f,transform.GetChild(0).position.z);
         }
-        else if(young == false){
+        else if(young == false && !isInSmallHole){
             transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, transform.GetChild(0).position.y - 0.2f,transform.GetChild(0).position.z);
         }
         
@@ -143,10 +153,25 @@ public class PlayerManager : MonoBehaviour
         {
             // Set the new size of the capsule collider
             collider.size = collider.size/2;
+            normalSize = false;
         }
-        else{
+        else if(!isInSmallHole){
             collider.size = collider.size*2;
+            Debug.Log("changed collider");
+            normalSize = true;
         }
+    }
+
+
+    public void increaseSize_OutOfHole(){
+
+        if(isInSmallHole && !normalSize){
+            GetComponent<CapsuleCollider2D>().size = GetComponent<CapsuleCollider2D>().size*2;
+            isInSmallHole = false;
+            //transform.GetChild(0).position = new Vector3(transform.GetChild(0).position.x, transform.GetChild(0).position.y - 0.2f,transform.GetChild(0).position.z);
+            normalSize = true;
+        }
+        
     }
 
 }

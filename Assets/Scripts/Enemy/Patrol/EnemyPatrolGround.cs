@@ -41,7 +41,14 @@ public class EnemyPatrolGround : MonoBehaviour
     private float ownHp;
     public bool detected = false;
     private Vector2 originalPosition;
-   
+
+
+#region 
+    public bool hitPlayer = false;
+    public bool resume = true;
+    public Vector2 collisionVector; 
+    public float knockbackForce = 1.1f;
+#endregion
 
 
     // ------------------------------------------------
@@ -68,6 +75,10 @@ public class EnemyPatrolGround : MonoBehaviour
 
         }
 
+
+
+
+
          
 
  
@@ -86,7 +97,7 @@ public class EnemyPatrolGround : MonoBehaviour
     void FixedUpdate()
     {
 
-        if(!stop){
+        if(!stop && resume && !hitPlayer){
 
             bool? is_young = target.gameObject.GetComponent<PlayerManager>().isYoung;
 
@@ -114,11 +125,45 @@ public class EnemyPatrolGround : MonoBehaviour
             } 
 
         }
+        else if(hitPlayer){
+
+            resume = false;
+            makeKnockback();
+            
+
+        }
        
     }
 
+    private void makeKnockback()
+    {
 
-void Patrol()
+
+            
+            Vector2 knockbackDirection = ((Vector2)transform.position - collisionVector).normalized;
+
+            //for horizontal enemies
+            knockbackDirection.y = 0f;
+
+            Debug.Log(knockbackDirection);
+
+            Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
+            //Debug.Log(knockbackDirection);
+            // Apply knockback force in the opposite direction of the enemy
+            ourRigidbody.AddForce(knockbackForceVector, ForceMode2D.Impulse);
+
+            hitPlayer = false;
+            Invoke("resumeMovement", 0.5f);
+    }
+
+    private void resumeMovement(){
+
+        resume = true;
+        
+
+    }
+
+    void Patrol()
 {
     float distance = (patrolPoints[currentPoint] - (Vector2)transform.position).magnitude;
 
