@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Timeline;
@@ -39,6 +40,7 @@ public class GameManager : MonoBehaviour
     public Text lifeCounter;
     public Text coinCounter;
 
+    public TextMeshProUGUI agetext;
     public static event System.Action OnPlayerRespawn;
 
     bool isPaused = false; 
@@ -51,10 +53,32 @@ public class GameManager : MonoBehaviour
         dieChannel.AddListener(Die);
         coinChannel.AddListener(CatchCoin);
         positionChannel.AddListener(DiePos);
+
+    
+        youngEventChannel.AddListener(youngHandler);
+        middleAgeEventChannel.AddListener(middle_ageHandler);
+        oldAgeEventChannel.AddListener(oldHandler);
+
         kittens = new List<Status>();
         lifeNumber = kittens.Count;
         life.text = lifeNumber.ToString("D2");
     }
+
+    private void middle_ageHandler()
+    {
+        agetext.text = "Adult Cat";
+    }
+
+    private void oldHandler()
+    {
+         agetext.text = "Old Tomcat";
+    }
+
+    private void youngHandler()
+    {
+        agetext.text = "Young Kitten";
+    }
+
 
     void Die()
     {

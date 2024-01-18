@@ -112,6 +112,8 @@ MonoBehaviour:
   target: {fileID: 0}
   visionRange: 5
   followSpeed: 2.64
+  fleeSpeed: 2
+  isRat: 0
   stop: 0
   detected: 0
 --- !u!114 &6852477326884400690
@@ -312,10 +314,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6675377257838573983, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7550347863696606684, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 989a6b020d9bed84aa4b70b9161716eb, type: 3}
+    - target: {fileID: 7550347863696606684, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550347863696606684, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7550347863696606684, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8219034037044727064, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.19037369
@@ -335,9 +353,6 @@ PrefabInstance:
     - target: {fileID: 8219034037044727064, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0088
-    - target: {fileID: 6675377257838573983, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
