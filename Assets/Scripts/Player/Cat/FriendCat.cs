@@ -11,30 +11,15 @@ public class FriendCat : MonoBehaviour
     public Sprite newSprite;
     public GenerateNextGeneration gg;
 
+    public SpriteRenderer t;
+    public Sprite[] typeSprite;
+
     private bool touched = false;
 
     private void OnEnable()
     {
-        type = UnityEngine.Random.Range(0,7);
-        if(type == 1)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color((204f/255f),1f,(153f/255f),1f);
-        }else if(type == 2)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-        }else if(type == 3)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color((102f/255f),1f,1f,1f);
-        }else if(type == 4)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        }else if(type == 5)
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
-        }else
-        {
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1f,(153f/255f),1f,1f);
-        }
+        type = UnityEngine.Random.Range(0,5);
+        t.sprite = typeSprite[type];
     }
     private void OnTriggerEnter2D(Collider2D collision){
         if (touched)

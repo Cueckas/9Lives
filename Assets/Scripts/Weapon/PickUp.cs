@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PickUp : MonoBehaviour
 {
-    float perRadian = 0.01f;
-    float radian = 0;
-    float radius =0.0025f;
+    public float perRadian = 0.01f;
+    public float radian = 0;
+    public float radius =0.0025f;
     float dy;
     public int type;
 
