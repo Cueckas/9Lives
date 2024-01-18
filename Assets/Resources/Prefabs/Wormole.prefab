@@ -10,7 +10,7 @@ Animator:
   m_GameObject: {fileID: 3540599753599816905}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 29a9a2cce902677448819d025eb28d59, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -112,6 +112,8 @@ MonoBehaviour:
   target: {fileID: 0}
   visionRange: 5
   followSpeed: 2.64
+  fleeSpeed: 2
+  isRat: 0
   stop: 0
   detected: 0
 --- !u!114 &6852477326884400690
@@ -312,6 +314,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6675377257838573983, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 7550347863696606684, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -335,9 +341,6 @@ PrefabInstance:
     - target: {fileID: 8219034037044727064, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.0088
-    - target: {fileID: 6675377257838573983, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
@@ -374,6 +377,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e86447d110f30e74a9f00bc729d749ef, type: 3}
+    - target: {fileID: 4796335353988561647, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6133641242760558664, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.19037369
