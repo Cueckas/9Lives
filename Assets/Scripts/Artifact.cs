@@ -2,15 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUp : MonoBehaviour
+public class Artifact : MonoBehaviour
 {
-    public float perRadian = 0.01f;
+   public float perRadian = 0.01f;
     public float radian = 0;
     public float radius =0.0025f;
     float dy;
-    public int type;
-
-    bool change = true;
 
     void FixedUpdate()
     {
@@ -18,13 +15,9 @@ public class PickUp : MonoBehaviour
         dy = Mathf.Cos(radian)*radius;
         transform.position += new Vector3(0,dy,0); 
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.transform.parent.GetChild(type).gameObject.SetActive(true);
-            Destroy(gameObject);
-        }
+        Debug.Log("win");
     }
 }

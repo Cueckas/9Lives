@@ -15,11 +15,7 @@ public class CatStats : MonoBehaviour
 
     [SerializeField] public float speed;
 
-    [SerializeField] public float jumpForce;
-
     [SerializeField] public float attack;
-
-    [SerializeField] public float attackSpeed;
 
     [SerializeField] NumberEventChannel timerEvent;
 
@@ -91,9 +87,7 @@ public class CatStats : MonoBehaviour
         this.hp = (int)s.hp;
         curHP = hp;
         this.speed = s.speed;
-        this.jumpForce = s.jumpForce;
         this.attack = s.attack;
-        this.attackSpeed = s.attackSpeed;
     }
 
     public void Setup(GenerateNextGeneration gg, HealthBar lifeBar, Text lifeCounter, Status s)
@@ -108,7 +102,7 @@ public class CatStats : MonoBehaviour
 
     public Status GetStatus()
     {
-        return new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed);
+        return new Status(timeLife,hp, speed, attack);
     }
 
     public void TakingDamage(int damage)

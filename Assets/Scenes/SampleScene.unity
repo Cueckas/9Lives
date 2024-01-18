@@ -1123,10 +1123,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f2fc0924a888a142bc5641984092466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  img: {fileID: 2800000, guid: 8954006f6ab4451488fd1515641a4eeb, type: 3}
-  speed: 1
-  fade_in: 0
-  alpha: 0
 --- !u!4 &1324461441
 Transform:
   m_ObjectHideFlags: 0

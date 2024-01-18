@@ -36,7 +36,7 @@ public class GenerateNextGeneration : MonoBehaviour
     {
         catOne = father.Copy();
         catOne.RandomAllStatus(0.9f, 1.1f);
-        catOne.RandomSingleStatus(1.1f,1.3f,motherType);
+        catOne.RandomSingleStatus(1.1f,1.35f,motherType);
         
     }
 }

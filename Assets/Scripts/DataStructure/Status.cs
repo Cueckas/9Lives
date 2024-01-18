@@ -12,34 +12,34 @@ public class Status
 
     public float speed;
 
-    public float jumpForce;
-
     public float attack;
-
-    public float attackSpeed;
 
     public int id;
 
     private List<int> parents;
 
-    private bool buff0, buff1, buff2, buff3, buff4, buff5;
+    private bool[] buffs;
+    
+    public int buffRange = 0;
+    public String t = "No Buff";
 
-    public Status(float timeLife, float hp, float speed, float jumpForce, float attack, float attackSpeed){
+    public Status(float timeLife, float hp, float speed, float attack){
         this.timeLife = timeLife;
         this.hp = hp;
         this.speed = speed;
-        this.jumpForce = jumpForce;
         this.attack = attack;
-        this.attackSpeed = attackSpeed;
         parents = new List<int>();
+        buffs = new bool[4];
     }
 
     public Status(){}
 
     public Status Copy()
     {
-        Status s = new Status(timeLife,hp, speed,jumpForce, attack, attackSpeed);
+        Status s = new Status(timeLife,hp, speed, attack);
         s.AddRange(parents);
+        s.buffRange = buffRange;
+        s.t = t;
         return s;
     }
 
@@ -53,107 +53,90 @@ public class Status
         this.timeLife *= UnityEngine.Random.Range(min,max);
         this.hp *= UnityEngine.Random.Range(min,max);
         this.speed *= UnityEngine.Random.Range(min,max);
-        this.jumpForce *= UnityEngine.Random.Range(min,max);
         this.attack *= UnityEngine.Random.Range(min,max);
-        this.attackSpeed *= UnityEngine.Random.Range(min,max);
     }
 
     void Mutate()
     {
-        if (buff0 && buff1)
+        if (buffs[0] && buffs[1])
         {
             this.timeLife *= UnityEngine.Random.Range(1.1f,1.3f);
             this.hp *= UnityEngine.Random.Range(1.1f,1.3f);
         }
-        if (buff2 && buff3)
+        if (buffs[2] && buffs[3])
         {
             this.speed *= UnityEngine.Random.Range(1.1f,1.2f);
-            this.jumpForce *= UnityEngine.Random.Range(1.1f,1.2f);
+            this.attack *= UnityEngine.Random.Range(1.1f,1.2f);
         }
-        if (buff4 && buff5)
-        {
-            this.attack *= 1.1f;
-            this.attackSpeed *= UnityEngine.Random.Range(1.1f,1.2f);
-        }
-        if (buff2 && buff5)
-        {
-            this.speed *= UnityEngine.Random.Range(1.1f,1.2f);
-            this.attackSpeed *= UnityEngine.Random.Range(1.1f,1.2f);
-        }
-        if (buff0 && (buff2 || buff3))
+        if (buffs[0] && (buffs[2] || buffs[3]))
         {
             if (UnityEngine.Random.Range(0,2) == 0)
             {
                 this.timeLife *= UnityEngine.Random.Range(0.8f,0.95f);
             }else
             {
-                if (buff2 )
+                if (buffs[2])
                 {
                     this.speed *= UnityEngine.Random.Range(0.9f,0.95f);
                 }else
                 {
-                    this.jumpForce *= UnityEngine.Random.Range(0.9f,0.95f);
+                    this.attack *= UnityEngine.Random.Range(0.9f,0.95f);
                 }
+                
             }
         }
     }
 
-    private void Check(int item)
+    private void Check(int item, float c)
     {
-        if (item == 0)
+        buffs[item] =true;
+        t = item==0?"TimeLife":item==1?"HP":item==2?"Speed":"Attack";
+        if (c < 1.15f)
         {
-            buff0 = true;
-        }else if (item == 1)
+            buffRange = 1;
+        }else if(c < 1.20f)
         {
-            buff1 = true;
-        }else if (item == 2)
+            buffRange = 2;
+        }else if(c < 1.25f)
         {
-            buff2 = true;
-        }else if (item == 3)
+            buffRange = 3;
+        }else if(c < 1.30f)
         {
-            buff3 = true;
-        }else if (item == 4)
+            buffRange = 4;
+        }else
         {
-            buff4 = true;
-        }else if (item == 5)
-        {
-            buff5 = true;
+            buffRange = 5;
         }
     }
 
     public void RandomSingleStatus(float min, float max, int status)
     {
         parents.Add(status);
-        Check(status);
+        
+        float c = UnityEngine.Random.Range(min,max);
+        Check(status,c);
         if (status == 0)
         {
-            this.timeLife *= UnityEngine.Random.Range(min,max);
+            this.timeLife *= c;
         }else if (status == 1)
         {
-            this.hp *= UnityEngine.Random.Range(min,max);
+            this.hp *= c;
         }else if (status == 2)
         {
-            this.speed *= UnityEngine.Random.Range(min,max);
-        }else if (status == 3)
-        {
-            this.jumpForce *= UnityEngine.Random.Range(min,max);
+            this.speed *= c;
         }else if (status == 4)
         {
-            this.attack *= UnityEngine.Random.Range(min,max);
-        }else if (status == 5)
-        {
-            this.attackSpeed *= UnityEngine.Random.Range(min,max);
+            this.attack *= c;
         }
+
         Mutate();       
     }
 
     public override String ToString()
     {
-        return $"Time Life: {timeLife:F0}\n" +
+        return $"Time Life: {timeLife:F0}s\n" +
                $"HP: {hp:F0}\n" +
                $"Speed: {speed:F0}\n" +
-               $"Jump Force: {jumpForce:F0}\n" +
-               $"Attack: {attack:F0}\n" +
-               $"Attack Speed: {attackSpeed:F0}\n";
+               $"Attack: {attack:F0}\n";
     }
 }
