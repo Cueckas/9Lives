@@ -51,7 +51,6 @@ public class Enemy_WormHeadSpawn : MonoBehaviour
 
         Physics2D.IgnoreLayerCollision(9, 6, true);
 
-        Debug.Log(HeadObject.name);
 
     }
 
