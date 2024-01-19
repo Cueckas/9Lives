@@ -64,8 +64,8 @@ public class EnemyStats : MonoBehaviour
 
             if(isMole){
 
-                gameObject.transform.parent.gameObject.GetComponent<EnemyPatrolGround>().hitPlayer = true;
-                gameObject.transform.parent.gameObject.GetComponent<EnemyPatrolGround>().collisionVector = (Vector2)collision.transform.position;
+                gameObject.transform.parent.parent.gameObject.GetComponent<EnemyPatrolGround>().hitPlayer = true;
+                gameObject.transform.parent.parent.gameObject.GetComponent<EnemyPatrolGround>().collisionVector = (Vector2)collision.transform.position;
                 
             }
             else{

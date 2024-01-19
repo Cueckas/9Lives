@@ -46,6 +46,12 @@ namespace TarodevController
         public float groundedDistanceWall_offset = 0f;
 
 
+        public bool canWallJump = false;
+
+    public VoidEventChannel middleAgeEventChannel;
+    public VoidEventChannel oldAgeEventChannel;
+
+
 
 
     #region knockback stuff
@@ -68,10 +74,32 @@ namespace TarodevController
             _cachedQueryStartInColliders = Physics2D.queriesStartInColliders;
         }
 
+        void Start(){
+
+            middleAgeEventChannel.AddListener(enableWallJump);
+            oldAgeEventChannel.AddListener(enableWallJump);
+        }
+
+        private void enableWallJump()
+        {
+            Wallcheck();
+            if(isLeftWall || isRightWall){
+                waitForWallLeave = true;
+
+            }else{
+                canWallJump = !canWallJump;
+                waitForWallLeave = false;
+            }
+            
+        }
+
         private void Update()
         {
             _time += Time.deltaTime;
             GatherInput();
+            if(waitForWallLeave){
+                enableWallJump();     
+            }
         }
 
         private void GatherInput()
@@ -104,8 +132,13 @@ namespace TarodevController
         private void FixedUpdate()
         {
                 CheckCollisions();
+
+
+                if(canWallJump){
                     HandleWallClimbing();
-                
+                    
+                }
+
                 HandleJump();
                 HandleDirection();       
                 HandleGravity();
@@ -321,7 +354,9 @@ namespace TarodevController
     public Vector3 wallOffset;
     public LayerMask wallLayer;
     public bool isWallMove = false;
-    void Wallcheck()
+    private bool waitForWallLeave = false;
+
+        void Wallcheck()
     {
         isLeftWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.left, _stats.GrounderDistance + groundedDistanceWall_offset, wallLayer);
         isRightWall = Physics2D.CapsuleCast(_col.bounds.center, _col.size, _col.direction, 0, Vector2.right, _stats.GrounderDistance + groundedDistanceWall_offset, wallLayer);

@@ -80,6 +80,10 @@ MonoBehaviour:
   isRat: 0
   stop: 0
   detected: 0
+  hitPlayer: 0
+  resume: 1
+  collisionVector: {x: 0, y: 0}
+  knockbackForce: 3
 --- !u!114 &6852477326884400690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,6 +205,7 @@ MonoBehaviour:
   attackPower: 50
   alive: 1
   knockbackForce: 20
+  isMole: 1
 --- !u!1001 &1684714290590590970
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -276,6 +281,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5182482112468891793, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
+      propertyPath: isMole
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6675377257838573983, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_Name
       value: Enemy_WormHead
@@ -322,11 +331,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8219034037044727064, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0043
+      value: -0.013
       objectReference: {fileID: 0}
     - target: {fileID: 8219034037044727064, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0088
+      value: -0.196
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b431c67105e7b24897b0ca9c8c89edb, type: 3}
@@ -353,6 +362,10 @@ PrefabInstance:
     - target: {fileID: 4492779839178113290, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492779839178113290, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4796335353988561647, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
       propertyPath: m_Size.x
@@ -384,11 +397,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6133641242760558664, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.03
+      value: 0.021
       objectReference: {fileID: 0}
     - target: {fileID: 6133641242760558664, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16
+      value: 0.107
       objectReference: {fileID: 0}
     - target: {fileID: 7027881547350980185, guid: c3fe8b796b594374ab1d84eeb2d7b57b, type: 3}
       propertyPath: m_LocalPosition.y
