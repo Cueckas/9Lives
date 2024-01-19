@@ -5,27 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class startgame : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject panel;
+    public void NewGame()
     {
-        
+        SceneManager.LoadScene(1);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Back()
     {
-        
+        SceneManager.LoadScene(0);
     }
 
-    private void OnMouseDown()
+    public void Rank()
     {
-        transform.localScale = transform.localScale * 0.9f;
+        panel.SetActive(true);
     }
 
-    private void OnMouseUp()
+    public void Reload()
     {
-        transform.localScale = transform.localScale / 0.9f;
-        
+        SceneManager.LoadScene(4);
     }
-
 }
