@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4260e995d750026428d448825cf4fe38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fullHp: 1
+  fullHp: 10
   attackPower: 20
   alive: 0
   knockbackForce: 20
