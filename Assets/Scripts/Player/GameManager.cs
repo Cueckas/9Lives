@@ -222,4 +222,10 @@ public class GameManager : MonoBehaviour
     {
         OnPlayerRespawn?.Invoke();
     }
+
+    public void SetResult()
+    {
+        float score = coinNumber * Mathf.Max(kittens.Count,1);
+        GameObject.Find("GameData")?.GetComponent<GameData>().Add(score);
+    }
 }

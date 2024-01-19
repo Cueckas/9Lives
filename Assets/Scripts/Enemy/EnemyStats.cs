@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyStats : MonoBehaviour
 {   
+    
     public float fullHp;
     public float attackPower;
     //public LayerMask platform;
@@ -11,6 +12,11 @@ public class EnemyStats : MonoBehaviour
 
     private float currentHp;
     public bool alive = true;
+    
+    public float knockbackForce = 20f;
+
+
+    public bool isMole = false;
 
     //public bool isWormole_Claw= false;
 
@@ -37,6 +43,9 @@ public class EnemyStats : MonoBehaviour
         // Check if the colliding object has a Rigidbody2D component
         Physics2D.IgnoreLayerCollision(8, 7, true);
 
+        
+        Rigidbody2D enemy = GetComponent<Rigidbody2D>();
+
         Rigidbody2D playerRigidbody = collision.gameObject.GetComponent<Rigidbody2D>();
         //bool grounded = collision.gameObject.GetComponent<PlayerController>();
         //PhysicsMaterial2D physicsMaterial2D = collision.sharedMaterial;
@@ -48,6 +57,37 @@ public class EnemyStats : MonoBehaviour
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player") && alive)
         {
+
+            
+            
+
+
+            if(isMole){
+
+                gameObject.transform.parent.gameObject.GetComponent<EnemyPatrolGround>().hitPlayer = true;
+                gameObject.transform.parent.gameObject.GetComponent<EnemyPatrolGround>().collisionVector = (Vector2)collision.transform.position;
+                
+            }
+            else{
+
+                if(GetComponent<EnemyPatrolGround>() != null){
+                    GetComponent<EnemyPatrolGround>().hitPlayer = true;
+                    GetComponent<EnemyPatrolGround>().collisionVector = (Vector2)collision.transform.position;
+                }
+                else{
+
+                    GetComponent<EnemyPatrolAir>().hitPlayer= true;
+                    GetComponent<EnemyPatrolAir>().collisionVector = (Vector2)collision.transform.position;
+
+
+                }
+                
+            }
+
+            
+
+
+
             Debug.Log("Collided with player");
             // Check if the player is moving downwards (jumping on top)
             if (collision.otherCollider.GetType().Name == "BoxCollider2D" ) //&& colliderMaterial!=null)

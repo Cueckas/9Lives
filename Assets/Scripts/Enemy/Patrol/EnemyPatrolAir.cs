@@ -31,6 +31,14 @@ public class EnemyPatrolAir : MonoBehaviour
     private bool died = false;
 
 
+#region knockback
+    public bool hitPlayer = false;
+    public bool resume = true;
+    public Vector2 collisionVector; 
+    public float knockbackForce = 1.1f;
+#endregion
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -72,7 +80,7 @@ public class EnemyPatrolAir : MonoBehaviour
 
     void FixedUpdate(){
 
-        if(target != null ){   
+        if(target != null && resume && !hitPlayer){   
 
             float distanceToPlayer = Vector2.Distance(transform.position, target.position);
 
@@ -93,6 +101,38 @@ public class EnemyPatrolAir : MonoBehaviour
             }
 
         } 
+        else if(hitPlayer){
+            resume = false;
+            makeKnockback();
+        }
+    }
+
+    private void makeKnockback()
+    {
+
+
+            
+            Vector2 knockbackDirection = ((Vector2)transform.position - collisionVector).normalized;
+
+            //for horizontal enemies
+            //knockbackDirection.y = 0f;
+
+            Debug.Log(knockbackDirection);
+
+            Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
+            //Debug.Log(knockbackDirection);
+            // Apply knockback force in the opposite direction of the enemy
+            rb.AddForce(knockbackForceVector, ForceMode2D.Impulse);
+
+            hitPlayer = false;
+            Invoke("resumeMovement", 0.5f);
+    }
+
+       private void resumeMovement(){
+
+        resume = true;
+        
+
     }
 
     

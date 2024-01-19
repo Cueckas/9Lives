@@ -200,6 +200,7 @@ MonoBehaviour:
   fullHp: 1
   attackPower: 50
   alive: 1
+  knockbackForce: 20
 --- !u!1001 &1684714290590590970
 PrefabInstance:
   m_ObjectHideFlags: 0
