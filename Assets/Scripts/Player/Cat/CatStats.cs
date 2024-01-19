@@ -62,6 +62,7 @@ public class CatStats : MonoBehaviour
             lifeBar.SetMaxHealth(hp);
             lifeCounter.text = $"{hp}/{hp}";
             gg.setFather(GetStatus());
+            gameObject.transform.GetChild(2).gameObject.GetComponent<PlayerManager>().SetStats(GetStatus());
         }
         catch (NullReferenceException)
         {
@@ -101,6 +102,7 @@ public class CatStats : MonoBehaviour
         curHP = hp;
         this.speed = s.speed;
         this.attack = s.attack;
+        gameObject.transform.GetChild(2).gameObject.GetComponent<PlayerManager>().SetStats(GetStatus());
     }
 
     public void Setup(GenerateNextGeneration gg, HealthBar lifeBar, Text lifeCounter, Status s)

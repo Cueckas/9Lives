@@ -126341,9 +126341,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1145245124}
     - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: hp
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: speed
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: attack
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: lifeBar
       value: 
       objectReference: {fileID: 1880334967}
+    - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: timeLife
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: lifeCounter
       value: 

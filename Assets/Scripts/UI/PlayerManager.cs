@@ -61,6 +61,12 @@ public class PlayerManager : MonoBehaviour
         playerRb = GetComponent<Rigidbody2D>();
     }
 
+    public void SetStats(Status s)
+    {
+        speed = s.speed;
+        attackDamage = s.attack;
+    }
+
     public void BecomeYoung()
     {
         // Adjust player attributes for the young phase
