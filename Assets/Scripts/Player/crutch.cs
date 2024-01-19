@@ -12,7 +12,12 @@ public class crutch : MonoBehaviour
     private float cooldownTimer = 0f;
     public float spawnCooldown = 3f;
     private bool attack = false;
+    public GameObject text;
 
+    void OnEnable()
+    {
+        text.SetActive(true);
+    }
     void FixedUpdate()
     {
         

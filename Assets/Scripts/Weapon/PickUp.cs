@@ -10,6 +10,8 @@ public class PickUp : MonoBehaviour
     float dy;
     public int type;
 
+    public GameObject text;
+
     bool change = true;
 
     void FixedUpdate()
@@ -20,9 +22,12 @@ public class PickUp : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
         if (collision.gameObject.tag == "Player")
         {
+            if (text != null)
+            {
+                text.SetActive(true);
+            }
             collision.gameObject.transform.parent.GetChild(type).gameObject.SetActive(true);
             Destroy(gameObject);
         }
