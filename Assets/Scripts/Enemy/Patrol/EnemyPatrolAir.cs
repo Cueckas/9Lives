@@ -46,6 +46,11 @@ public class EnemyPatrolAir : MonoBehaviour
         Physics2D.IgnoreLayerCollision(8, 7, true);
         Physics2D.IgnoreLayerCollision(8, 8, true);
 
+        if(isGhost){
+
+            Physics2D.IgnoreLayerCollision(8, 3, true);
+        }
+
         FindPlayer();
 
 

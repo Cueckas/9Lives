@@ -95946,6 +95946,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2001052606}
     m_Modifications:
+    - target: {fileID: 2340482389980665500, guid: 2112b14b827d9c444888904af4b5d00a, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4760975975185182535, guid: 2112b14b827d9c444888904af4b5d00a, type: 3}
       propertyPath: m_Name
       value: Coin (27)
@@ -126389,6 +126393,14 @@ PrefabInstance:
       propertyPath: wallOffset.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1288615784988209809, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: oldAgeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: d02aea55e29eac341be04a0649c10187, type: 2}
+    - target: {fileID: 1288615784988209809, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
+      propertyPath: middleAgeEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 51d388de7b6d4724db07ffea034a4c8e, type: 2}
     - target: {fileID: 1288615785012808448, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -126399,11 +126411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -130.75
+      value: -125.54
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.16
+      value: -17.55
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -126447,7 +126459,7 @@ PrefabInstance:
       objectReference: {fileID: 1880334967}
     - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: timeLife
-      value: 1000
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502989, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: lifeCounter
