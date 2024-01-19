@@ -13,7 +13,7 @@ public class PanelControl : MonoBehaviour
         int min = Mathf.Min(3,g.list.Count);
         for (int i = 0; i < min; i++)
         {
-           ranks[i].text = (i+1) +".  "+ g.list[i]; 
+           ranks[i].text = (i+1) +"."+ g.list[i].name + " - " + g.list[i].score; 
         }
     }
 

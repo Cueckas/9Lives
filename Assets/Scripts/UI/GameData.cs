@@ -6,16 +6,16 @@ using UnityEngine;
 public class GameData : MonoBehaviour
 {
     public static GameData Instance { get; private set; }
-    public List<float> list;
+    public List<PlayerRecord> list;
 
-    public float temp;
+    public PlayerRecord temp;
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            list = new List<float>();
+            list = new List<PlayerRecord>();
             DontDestroyOnLoad(gameObject);
         }else
         {
@@ -25,10 +25,14 @@ public class GameData : MonoBehaviour
 
     public void Add(float score)
     {
-        list.Add(score);
-        temp = score;
-        list.Sort();
+        temp = new PlayerRecord(score);
+        list.Add(temp);
+        
+        list.Sort(PlayerRecord.SortForm);
     }
 
-    
+    public void AddName(String name)
+    {
+        temp.name = name;
+    }
 }

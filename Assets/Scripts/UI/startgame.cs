@@ -21,4 +21,8 @@ public class startgame : MonoBehaviour
         panel.SetActive(true);
     }
 
+    public void Reload()
+    {
+        SceneManager.LoadScene(4);
+    }
 }
