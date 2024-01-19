@@ -121,7 +121,7 @@ public class EnemyPatrolAir : MonoBehaviour
             //for horizontal enemies
             //knockbackDirection.y = 0f;
 
-            Debug.Log(knockbackDirection);
+            //Debug.Log(knockbackDirection);
 
             Vector2 knockbackForceVector = knockbackDirection * knockbackForce;
             //Debug.Log(knockbackDirection);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,9 +64,15 @@ public class EnemyStats : MonoBehaviour
 
 
             if(isMole){
-
-                gameObject.transform.parent.parent.gameObject.GetComponent<EnemyPatrolGround>().hitPlayer = true;
-                gameObject.transform.parent.parent.gameObject.GetComponent<EnemyPatrolGround>().collisionVector = (Vector2)collision.transform.position;
+                try
+                {
+                    gameObject.transform.parent.gameObject.GetComponent<EnemyPatrolGround>().hitPlayer = true;
+                    gameObject.transform.parent.gameObject.GetComponent<EnemyPatrolGround>().collisionVector = (Vector2)collision.transform.position;
+                
+                }
+                catch (NullReferenceException)
+                {
+                }
                 
             }
             else{
@@ -88,7 +95,7 @@ public class EnemyStats : MonoBehaviour
 
 
 
-            Debug.Log("Collided with player");
+           // Debug.Log("Collided with player");
             // Check if the player is moving downwards (jumping on top)
             if (collision.otherCollider.GetType().Name == "BoxCollider2D" ) //&& colliderMaterial!=null)
             {
