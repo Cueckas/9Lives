@@ -94,7 +94,7 @@ public class EnemyStats : MonoBehaviour
             {
                 
                 // Player is moving downward, so damage the enemy
-                TakeDamage(10); // You can adjust the damage amount as
+                TakeDamage(100); // You can adjust the damage amount as
 
                 
             }
