@@ -149,7 +149,7 @@ public class CrutchSpawn : MonoBehaviour
         Vector3 CrutchPosition = new Vector3(playerTransform.position.x , playerTransform.position.y , playerTransform.position.z);
         // Instantiate the prefab at the specified spawn point
         GameObject referenceCrutch = Instantiate(Crutch, CrutchPosition, playerTransform.rotation);
-        referenceCrutch.transform.GetChild(0).gameObject.GetComponent<DoDamage>().damage = gameObject.transform.parent.gameObject.GetComponent<CatStats>().attack;
+        referenceCrutch.GetComponent<DoDamage>().damage = gameObject.transform.parent.parent.gameObject.GetComponent<CatStats>().attack;
         referenceCrutch.transform.parent = playerTransform;
 
         startTime = Time.time;
@@ -161,7 +161,7 @@ public class CrutchSpawn : MonoBehaviour
             //MoveToRight();
             Transform objectTransform = referenceCrutch.transform;
 
-            referenceCrutch.transform.position = new Vector3(playerTransform.position.x + 0.1f, playerTransform.position.y - 1.2f, 0f);
+            referenceCrutch.transform.position = new Vector3(playerTransform.position.x + 0.5f, playerTransform.position.y+ 0.5f, 0f);
             referenceCrutch.transform.localScale = new Vector3(-referenceCrutch.transform.localScale.x, referenceCrutch.transform.localScale.y, referenceCrutch.transform.localScale.z);
 
         }
@@ -170,13 +170,13 @@ public class CrutchSpawn : MonoBehaviour
         {
             
 
-            referenceCrutch.transform.position = new Vector3(playerTransform.position.x - 0.1f, playerTransform.position.y - 1.2f, 0f);
+            referenceCrutch.transform.position = new Vector3(playerTransform.position.x - 0.5f, playerTransform.position.y + 0.5f, 0f);
 
             Debug.Log("entrei no facingRight=false");
             //MoveToLeft();
         }
 
-        Destroy(referenceCrutch, 0.2f);
+        Destroy(referenceCrutch, 1f);
 
         // Optionally, you can do something with the spawnedPrefab, like setting its properties or adding components.
         // Example: spawnedPrefab.GetComponent<YourScript>().YourMethod();

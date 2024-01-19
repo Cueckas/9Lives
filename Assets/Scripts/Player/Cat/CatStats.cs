@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TarodevController;
@@ -45,15 +46,19 @@ public class CatStats : MonoBehaviour
         timerEvent.Broadcast(timeLife);
         dieChannel.AddListener(Die);
         oldAgeEventChannel.AddListener(Old);
-        if (lifeCounter != null)
+        curHP = hp;
+        isInvicible = true;
+        invicibleTime = 1.0f;
+        try
         {
             lifeBar.SetMaxHealth(hp);
             lifeCounter.text = $"{hp}/{hp}";
             gg.setFather(GetStatus());
         }
-        curHP = hp;
-        isInvicible = true;
-        invicibleTime = 1.0f;
+        catch (NullReferenceException)
+        {
+        }
+        
     }
     void FixedUpdate()
     {
