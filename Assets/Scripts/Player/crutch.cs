@@ -15,30 +15,13 @@ public class crutch : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         if (Input.GetKey(chargeKey))
         {   
-
             //Debug.Log(attack);
 
-            if (!attack)
-            {
-                cooldownTimer = spawnCooldown;
-                // Start or continue charging
-                GetComponent<ColliderDelay>().Use();
-                
-                attack = true;
-            }
-
-        }
-
-        if (attack)
-        {   
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0f)
-            {
-                attack = false;
-
-            }
+            gameObject.GetComponent<SpriteRenderer>().color -= new Color(0,0,0,1);
+            Invoke("Change",1f);
         }
         float playerInput = Input.GetAxis("Horizontal");
         if (playerInput > 0)
@@ -60,5 +43,10 @@ public class crutch : MonoBehaviour
             }
         }
         
+    }
+
+    void Change()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color += new Color(0,0,0,1);
     }
 }
