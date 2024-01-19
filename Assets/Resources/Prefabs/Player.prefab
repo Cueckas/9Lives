@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Crutch: {fileID: 5800999013276167281, guid: b785a5eb43b8e994a9acd3865da939d4, type: 3}
   Player: {fileID: 1288615784988209806}
-  chargeKey: 104
+  chargeKey: 107
   spawnCooldown: 3
   maxChargeTime: 3
 --- !u!1 &1951857738

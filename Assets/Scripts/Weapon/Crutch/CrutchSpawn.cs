@@ -121,7 +121,7 @@ public class CrutchSpawn : MonoBehaviour
 
     void MoveToRight()
     {
-        Debug.Log("entrei no MoveRight");
+        //Debug.Log("entrei no MoveRight");
         
     }
 
@@ -144,7 +144,7 @@ public class CrutchSpawn : MonoBehaviour
         //Vector3 SpawnPoint = playerTransform;
 
         
-        Debug.Log(playerTransform.position);
+        //Debug.Log(playerTransform.position);
 
         Vector3 CrutchPosition = new Vector3(playerTransform.position.x , playerTransform.position.y , playerTransform.position.z);
         // Instantiate the prefab at the specified spawn point
@@ -156,7 +156,7 @@ public class CrutchSpawn : MonoBehaviour
 
         if (facingRight)
         {   
-            Debug.Log("entrei no facingRight");
+            //Debug.Log("entrei no facingRight");
            
             //MoveToRight();
             Transform objectTransform = referenceCrutch.transform;
@@ -172,7 +172,7 @@ public class CrutchSpawn : MonoBehaviour
 
             referenceCrutch.transform.position = new Vector3(playerTransform.position.x - 0.5f, playerTransform.position.y + 0.5f, 0f);
 
-            Debug.Log("entrei no facingRight=false");
+            //Debug.Log("entrei no facingRight=false");
             //MoveToLeft();
         }
 
@@ -191,7 +191,7 @@ public class CrutchSpawn : MonoBehaviour
             //throw bomb explode
             // Reset charge variables
 
-            Debug.Log("Charging");
+            //Debug.Log("Charging");
             isCharging = false;
             chargeTime = 0.0f;
             //Destroy(spawnedPrefab.gameObject, 1f);
