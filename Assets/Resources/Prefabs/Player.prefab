@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1288615785757666605}
-  chargeKey: 104
+  chargeKey: 107
   spawnCooldown: 3
   text: {fileID: 1951857738}
 --- !u!114 &1185021184399117777
@@ -185,7 +185,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'You have unlocked the Crutch
 
-    Press "X" to use Crutch to attack enimies'
+    Press "K" to use Crutch to attack enimies'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -14997,7 +14997,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scythe: {fileID: 8811070295949157128, guid: b2efbec0e70add04fafb30da935bbefc, type: 3}
   Player: {fileID: 1288615784988209806}
-  chargeKey: 103
+  chargeKey: 106
   spawnCooldown: 3
   maxChargeTime: 3
 --- !u!1 &1288615784988209806
@@ -15329,7 +15329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bomb: {fileID: 2745809062219077417, guid: a574d2dfd0b79ba439ee40d21f6b7155, type: 3}
   Player: {fileID: 1288615784988209806}
-  chargeKey: 120
+  chargeKey: 104
   maxChargeTime: 3
   damage: 0
   spawnCooldown: 3
@@ -20242,7 +20242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832b4b3e0c9b53b4b9b5d02fb5c7ce59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLife: 10
+  timeLife: 300
   hp: 100
   speed: 0
   attack: 10

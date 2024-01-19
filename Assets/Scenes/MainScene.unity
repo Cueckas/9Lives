@@ -126324,25 +126324,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 363573889, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
-      propertyPath: chargeKey
-      value: 107
-      objectReference: {fileID: 0}
-    - target: {fileID: 1951857741, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
-      propertyPath: m_text
-      value: 'You have unlocked the Crutch
-
-        Press "K" to use Crutch to attack
-        enimies'
-      objectReference: {fileID: 0}
-    - target: {fileID: 1288615784944908924, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
-      propertyPath: chargeKey
-      value: 106
-      objectReference: {fileID: 0}
-    - target: {fileID: 1288615785012808454, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
-      propertyPath: chargeKey
-      value: 104
-      objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_RootOrder
       value: 2
