@@ -49,6 +49,15 @@ public class CatStats : MonoBehaviour
         curHP = hp;
         isInvicible = true;
         invicibleTime = 1.0f;
+        Debug.Log(GameObject.Find("PickBomb") == null);
+        if (GameObject.Find("PickBomb") == null)
+        {
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        if (GameObject.Find("PickScythe") == null)
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        }
         try
         {
             lifeBar.SetMaxHealth(hp);

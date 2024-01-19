@@ -32694,7 +32694,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &570712264
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32752,7 +32752,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -125580,7 +125580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2089609432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -126330,11 +126330,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -161.91
+      value: -175.91
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -16.69
+      value: -18.69
       objectReference: {fileID: 0}
     - target: {fileID: 1288615785353502988, guid: 4cac9caed8f973d448d9ecf6c47cb82a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -126508,7 +126508,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8793892537931638993}
   m_Layer: 0
-  m_Name: Scythe
+  m_Name: PickScythe
   m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -126588,7 +126588,7 @@ GameObject:
   - component: {fileID: 6148952372145596386}
   - component: {fileID: 6148952372145596385}
   m_Layer: 0
-  m_Name: Bomb
+  m_Name: PickBomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
