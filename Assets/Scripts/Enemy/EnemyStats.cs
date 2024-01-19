@@ -58,11 +58,6 @@ public class EnemyStats : MonoBehaviour
         //PhysicsMaterial2D ownColliderMaterial =  boxCollider.;
         if (playerRigidbody != null && collision.gameObject.CompareTag("Player") && alive)
         {
-
-            
-            
-
-
             if(isMole){
                 try
                 {
@@ -90,11 +85,6 @@ public class EnemyStats : MonoBehaviour
                 }
                 
             }
-
-            
-
-
-
            // Debug.Log("Collided with player");
             // Check if the player is moving downwards (jumping on top)
             if (collision.otherCollider.GetType().Name == "BoxCollider2D" ) //&& colliderMaterial!=null)
@@ -129,7 +119,14 @@ public class EnemyStats : MonoBehaviour
     {
         // Add any death-related logic here (e.g., play death animation, destroy GameObject, etc.)
         alive = false;
-        Destroy(gameObject,0.2f);
+        if (isMole)
+        {
+            Destroy(gameObject.transform.parent.gameObject);
+        }else
+        {
+            Destroy(gameObject,0.2f);
+        }
+        
     }
 
 

@@ -42,6 +42,9 @@ public class EnemyPatrolGround : MonoBehaviour
     public bool detected = false;
     private Vector2 originalPosition;
 
+    public GameObject mark;
+    public GameObject fear;
+
 
 #region 
     public bool hitPlayer = false;
@@ -74,13 +77,6 @@ public class EnemyPatrolGround : MonoBehaviour
             died = true;
 
         }
-
-
-
-
-
-         
-
  
         Detected();
     }
@@ -96,23 +92,21 @@ public class EnemyPatrolGround : MonoBehaviour
 
     void FixedUpdate()
     {
-
         if(!stop && resume && !hitPlayer){
 
             bool? is_young = target.gameObject.GetComponent<PlayerManager>().isYoung;
 
             if(detected){
-
                 if(is_young == true){
                     FollowTarget();
                 }
                 else{
                     if(isRat){
-
                         if(is_young == false)
                             FleeTarget();  
-                        else
+                        else{
                             Patrol();
+                        }    
                     }
                     else{
                         Patrol();
@@ -126,20 +120,14 @@ public class EnemyPatrolGround : MonoBehaviour
 
         }
         else if(hitPlayer){
-
             resume = false;
             makeKnockback();
-            
-
         }
        
     }
 
     private void makeKnockback()
-    {
-
-
-            
+    {     
             Vector2 knockbackDirection = ((Vector2)transform.position - collisionVector).normalized;
 
             //for horizontal enemies
@@ -206,9 +194,9 @@ public class EnemyPatrolGround : MonoBehaviour
         {
             Flip();
         }
-    }
-
-    
+        mark.SetActive(false);
+        fear.SetActive(false);
+    }  
 }
 
 
@@ -268,7 +256,7 @@ public class EnemyPatrolGround : MonoBehaviour
         {
             Flip();
         }
-
+        mark.SetActive(true);
     }
 
 
@@ -294,6 +282,7 @@ public class EnemyPatrolGround : MonoBehaviour
     {
         Flip();
     }
+    fear.SetActive(true);
 }
 
 }

@@ -34,20 +34,20 @@ public class Timer : MonoBehaviour
             timeBar.SetHealth(time);
             timeText.text = System.TimeSpan.FromSeconds(time).ToString(@"mm\:ss");
 
-            if (time > totalTime * 0.8f && !triggeredYoung)
+            if (!triggeredYoung && time > totalTime * 0.8f )
             {
                 youngEventChannel?.Broadcast();
                 triggeredYoung = true;
 
                 allghosts.SetActive(false);
             }
-            else if (time > totalTime * 0.4f && time <= totalTime * 0.8f && !triggeredMiddle)
+            else if (!triggeredMiddle && time > totalTime * 0.4f && time <= totalTime * 0.8f)
             {
                 middleAgeEventChannel?.Broadcast();
                 triggeredMiddle = true;
                 allghosts.SetActive(false);
             }
-            else if (time <= totalTime * 0.4f && !triggeredOld)
+            else if (!triggeredOld && time <= totalTime * 0.4f )
             {
                 oldAgeEventChannel?.Broadcast();
                 triggeredOld = true;

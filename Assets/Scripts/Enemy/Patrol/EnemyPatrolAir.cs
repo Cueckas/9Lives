@@ -29,6 +29,8 @@ public class EnemyPatrolAir : MonoBehaviour
 
     private bool died = false;
 
+    public GameObject mark;
+
 
 #region knockback
     public bool hitPlayer = false;
@@ -92,16 +94,18 @@ public class EnemyPatrolAir : MonoBehaviour
             {
                 if(target.gameObject.GetComponent<PlayerManager>().isYoung == true || (target.gameObject.GetComponent<PlayerManager>().isYoung == false && isGhost)){
                     Chase();
+                    mark.SetActive(true);
                 }
                 else if(!isGhost){
-
                     Patrol();
+                    mark.SetActive(false);
                 }
                 
             }
             else if(!isGhost)
             {   
                 Patrol();
+                mark.SetActive(false);
             }
 
         } 

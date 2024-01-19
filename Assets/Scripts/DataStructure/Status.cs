@@ -50,7 +50,7 @@ public class Status
 
     public void RandomAllStatus(float min, float max)
     {
-        this.timeLife *= UnityEngine.Random.Range(min,max);
+        this.timeLife *= UnityEngine.Random.Range(0.75f,0.9f);
         this.hp *= UnityEngine.Random.Range(min,max);
         this.speed *= UnityEngine.Random.Range(min,max);
         this.attack *= UnityEngine.Random.Range(min,max);

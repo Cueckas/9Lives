@@ -8,10 +8,19 @@ public class SearchScore : MonoBehaviour
 {
     public Text t;
     public InputField playerName;
+    public KeyCode chargeKey;
     void Start()
     {
         float g = GameObject.Find("GameData").GetComponent<GameData>().temp.score;
         t.text = $"Your score: {g:F0}";
+    }
+
+    void FixedUpdate()
+    {
+        if (Input.GetKey(KeyCode.Return))
+        {
+            Submit();
+        }
     }
 
     public void Change()

@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour
 {
@@ -78,6 +79,20 @@ public class GameMenu : MonoBehaviour
         {
             ToggleMenu();
         }
+    }
+
+    public void BackMain()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
+        SceneManager.LoadScene(0);
+    }
+
+    public void Restart()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = isPaused ? 0f : 1f;
+        SceneManager.LoadScene(1);
     }
 }
 
