@@ -58,7 +58,6 @@ public class Timer : MonoBehaviour
             if (time <= 0)
             {
                 start = false;
-                Debug.Log("Game End");
                 dieChannel.Broadcast();
             }
         }

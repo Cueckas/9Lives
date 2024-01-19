@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -84,11 +85,14 @@ public class GameManager : MonoBehaviour
     {
         lifeNumber -= 1;
         life.text = lifeNumber.ToString("D2");
-        toggleDeathMenu();
+        
         
         if (lifeNumber < 0)
         {
             GameOver();
+        }else
+        {
+            toggleDeathMenu();  
         }
     }
 
@@ -162,7 +166,7 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
-        Debug.Log("game over");
+        SceneManager.LoadScene(3);
     }
 
     public void Pause(){
@@ -208,7 +212,7 @@ public class GameManager : MonoBehaviour
     public List<Status> GetKittenList()
     {
         List<Status> result = new List<Status>();
-        result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
+        //result.Add(curPlayer.GetComponent<CatStats>().GetStatus());
         result.AddRange(kittens);
         return result;
     }

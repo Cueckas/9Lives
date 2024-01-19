@@ -157,7 +157,6 @@ public class PlayerManager : MonoBehaviour
         }
         else if(!isInSmallHole){
             collider.size = collider.size*2;
-            Debug.Log("changed collider");
             normalSize = true;
         }
     }

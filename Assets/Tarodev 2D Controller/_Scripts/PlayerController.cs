@@ -79,6 +79,11 @@ namespace TarodevController
             middleAgeEventChannel.AddListener(enableWallJump);
             oldAgeEventChannel.AddListener(enableWallJump);
         }
+        void OnDestroy()
+        {
+            middleAgeEventChannel.RemoveListener(enableWallJump);
+            oldAgeEventChannel.RemoveListener(enableWallJump);
+        }
 
         private void enableWallJump()
         {
@@ -271,7 +276,6 @@ namespace TarodevController
             _coyoteUsable = false;
             if (wallJump)
             {
-                Debug.Log("jumped in walll");
                 _frameVelocity.x = xWallForce;
                 _frameVelocity.y = yWallForce;
                 wallJump = false;
@@ -281,7 +285,6 @@ namespace TarodevController
             }
             
             Jumped?.Invoke();
-            Debug.Log("jumped");
             expiredWallTime = false;
         }
 

@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 19df9b7e852377847b93516bc7ac4e27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 44, y: 44}
@@ -14779,7 +14779,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288615784988209806}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -13.7, y: -1.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1288615786325928355}
@@ -14805,6 +14805,9 @@ MonoBehaviour:
   xWallForce: 12
   yWallForce: 12.5
   groundedDistanceWall_offset: 0
+  canWallJump: 0
+  middleAgeEventChannel: {fileID: 11400000, guid: 51d388de7b6d4724db07ffea034a4c8e, type: 2}
+  oldAgeEventChannel: {fileID: 11400000, guid: d02aea55e29eac341be04a0649c10187, type: 2}
   knockbackForce: 1
   _grounded: 0
   wallOffset: {x: 1, y: 1, z: 0}
@@ -19988,7 +19991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 832b4b3e0c9b53b4b9b5d02fb5c7ce59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLife: 1000
+  timeLife: 10
   hp: 100
   speed: 0
   attack: 10

@@ -214,34 +214,28 @@ public class EnemyPatrolGround : MonoBehaviour
 
     void Detected(){
 
-
-        if(target.gameObject.GetComponent<PlayerManager>().isYoung == false){
+        try
+        {
+           if(target.gameObject.GetComponent<PlayerManager>().isYoung == false){
 
             if (Vector2.Distance(transform.position, target.position) < visionRange - 1.5f){
                 detected = true;
-            }
-
-            else {
+            }else {
                 detected = false;
-            
             }
-
         }else{
-            
-            if (Vector2.Distance(transform.position, target.position) < visionRange){
-            detected = true;
+                
+                if (Vector2.Distance(transform.position, target.position) < visionRange){
+                detected = true;
+                }else {
+                    detected = false;
+                    
+                }
+            } 
         }
-
-        else {
-            detected = false;
-            
+        catch (NullReferenceException)
+        {
         }
-
-        }
-
-
-
-
     }
 
     void Flip()

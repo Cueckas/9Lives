@@ -19,7 +19,6 @@ public class FriendCat : MonoBehaviour
     private void OnEnable()
     {
         type = UnityEngine.Random.Range(0,4);
-        Debug.Log(type);
         t.sprite = typeSprite[type];
     }
     private void OnTriggerEnter2D(Collider2D collision){
