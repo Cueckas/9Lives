@@ -23,6 +23,12 @@ public class CollectionMenu : MonoBehaviour
             child.GetChild(i).gameObject.SetActive(true);
         }
     }
+    void OnDisable()
+    {
+        DisEnableStars();
+        buffStat.text = "Buff Stat: ";
+        statusShow.text = "";
+    }
 
     public void OnClick(int n)
     {
